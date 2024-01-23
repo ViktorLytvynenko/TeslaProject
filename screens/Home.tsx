@@ -47,9 +47,10 @@ const s = StyleSheet.create({
     container: {
         width: "100%",
         height: "100%",
-        paddingTop: 50 // test
+        marginTop: 25 // test
     },
     settingsContainer: {
+        paddingTop: 25, // test
         width: "100%",
         display: "flex",
         flexDirection: "column",
@@ -57,13 +58,13 @@ const s = StyleSheet.create({
         justifyContent: "center"
     },
     settingsContainerC1: {
-        width: 62,
-        height: 62,
+        width: 72,
+        height: 72,
     },
     settingsContainerC1Img: {
         alignSelf: "flex-end",
-        width: 62,
-        height: 62,
+        width: 72,
+        height: 72,
     },
     settingsContainerC2: {
         width: 245,
@@ -89,7 +90,6 @@ const s = StyleSheet.create({
         alignItems: "center",
         columnGap: 20,
         paddingHorizontal: 20,
-        paddingVertical: 2
     },
     settingsContainerC3InnerText: {
         textAlign: "center",
@@ -100,13 +100,13 @@ const s = StyleSheet.create({
         letterSpacing: -0.408
 },
     settingsContainerC3InnerBox: {
-        width: 62,
-        height: 62,
+        width: 72,
+        height: 72,
     },
     settingsContainerC3InnerBoxImg: {
         marginTop: 7,
-        width: 62,
-        height: 62,
+        width: 72,
+        height: 72,
     }
 
 });
