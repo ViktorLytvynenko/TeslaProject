@@ -1,46 +1,39 @@
 import { FC } from "react";
-import {
-    View,
-    StyleSheet,
-    Text,
-    Image,
-    TouchableWithoutFeedback,
-} from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Settings from "../components/Settings";
 import ButtonLock from "../components/ButtonLock";
 
-const Home: FC<any> = ({ navigation }) => {
+const UnlockPage: FC<any> = ({ navigation }) => {
     const onPress = () => {
-        navigation.navigate("UnlockPage");
+        navigation.navigate("Home");
     };
-
     return (
         <View style={s.container}>
             <LinearGradient
-                colors={["#292C31", "#000", "#000", "#292929"]}
-                locations={[0, 0.3009, 0.5735, 1]}
+                colors={["#2A2D32", "#161719"]}
+                locations={[0, 0.9917]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 style={s.container}
             >
                 <View style={s.wrapper}>
                     <Settings />
-                    <View style={s.carDark}>
+                    <View style={s.carLight}>
                         <Image
-                            source={require("../assets/carDark.png")}
-                            style={s.carDarkImg}
+                            source={require("../assets/carLight.png")}
+                            style={s.carLightImg}
                         />
                     </View>
                     <LinearGradient
-                        colors={["#17171C", "#18191B"]}
+                        colors={["#18191B", "#18191B"]}
                         locations={[0.0368, 0.4642]}
                         style={s.unlockGradient}
                     >
                         <ButtonLock
-                            text="Unlock"
+                            text="Lock"
                             onPress={onPress}
-                            img={require("../assets/buttonLock.png")}
+                            img={require("../assets/lock.png")}
                         />
                     </LinearGradient>
                 </View>
@@ -63,14 +56,13 @@ const s = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    carDark: {
-        width: 245,
-        height: 163,
-        marginTop: 132,
+    carLight: {
+        marginTop: 130,
+        marginBottom: 172,
     },
-    carDarkImg: {
-        width: "100%",
-        height: "100%",
+    carLightImg: {
+        width: 256,
+        height: 208,
     },
     unlockGradient: {
         display: "flex",
@@ -78,33 +70,15 @@ const s = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 40,
-        marginTop: 217,
-    },
-    unlockContainer: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        columnGap: 20,
-    },
-    unlockText: {
-        textAlign: "center",
-        color: "white",
-        fontWeight: "600",
-        fontSize: 17,
-        lineHeight: 22,
-        letterSpacing: -0.408,
-        paddingHorizontal: 20,
-    },
-    // unlockBtn: {
-    //     width: 72,
-    //     height: 72,
-    // },
-    unlockImg: {
-        marginTop: 7,
-        width: 72,
-        height: 72,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 9,
+            height: 9,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 20,
+        elevation: 10,
     },
 });
 
-export default Home;
+export default UnlockPage;
