@@ -1,9 +1,13 @@
 import { FC } from "react";
 import { TouchableWithoutFeedback, Image, StyleSheet } from "react-native";
 
-const Settings: FC = () => {
+interface ISettings {
+    onPress: () => void;
+}
+
+const Settings: FC<ISettings> = ({ onPress }) => {
     return (
-        <TouchableWithoutFeedback style={s.settings}>
+        <TouchableWithoutFeedback style={s.settings} onPress={onPress}>
             <Image
                 source={require("../assets/button.png")}
                 style={s.settingsImg}

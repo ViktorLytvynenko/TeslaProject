@@ -1,31 +1,25 @@
 import { FC } from "react";
-import {
-    View,
-    StyleSheet,
-    Text,
-    Image,
-    TouchableWithoutFeedback,
-} from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Settings from "../components/Settings";
 import ButtonLock from "../components/ButtonLock";
+import stylesBase from "../styles/styles";
 
-const Home: FC<any> = ({ navigation }) => {
+const LockPage: FC<any> = ({ navigation }) => {
     const onPress = () => {
         navigation.navigate("UnlockPage");
     };
 
     return (
-        <View style={s.container}>
+        <View style={stylesBase.container}>
             <LinearGradient
                 colors={["#292C31", "#000", "#000", "#292929"]}
                 locations={[0, 0.3009, 0.5735, 1]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
-                style={s.container}
+                style={stylesBase.container}
             >
-                <View style={s.wrapper}>
-                    <Settings />
+                <View style={stylesBase.wrapper}>
                     <View style={s.carDark}>
                         <Image
                             source={require("../assets/carDark.png")}
@@ -50,23 +44,10 @@ const Home: FC<any> = ({ navigation }) => {
 };
 
 const s = StyleSheet.create({
-    container: {
-        width: "100%",
-        height: "100%",
-        marginTop: 25, // test
-    },
-    wrapper: {
-        paddingTop: 25, // test
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-    },
     carDark: {
         width: 245,
         height: 163,
-        marginTop: 132,
+        marginTop: 217,
     },
     carDarkImg: {
         width: "100%",
@@ -107,4 +88,4 @@ const s = StyleSheet.create({
     },
 });
 
-export default Home;
+export default LockPage;

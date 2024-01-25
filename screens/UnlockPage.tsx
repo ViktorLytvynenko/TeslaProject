@@ -1,29 +1,50 @@
-import { FC } from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { FC, useState } from "react";
+import { View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Settings from "../components/Settings";
 import ButtonLock from "../components/ButtonLock";
+import stylesBase from "../styles/styles";
 
 const UnlockPage: FC<any> = ({ navigation }) => {
+    const [pressImg, setPressImg] = useState(false);
+
     const onPress = () => {
-        navigation.navigate("Home");
+        navigation.navigate("LockPage");
+    };
+    const handleImagePress = () => {
+        setPressImg(!pressImg);
+    };
+    const handleSettings = () => {
+        navigation.navigate("HomePage");
     };
     return (
-        <View style={s.container}>
+        <View style={stylesBase.container}>
             <LinearGradient
                 colors={["#2A2D32", "#161719"]}
                 locations={[0, 0.9917]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
-                style={s.container}
+                style={stylesBase.container}
             >
-                <View style={s.wrapper}>
-                    <Settings />
+                <View style={stylesBase.wrapper}>
+                    <Settings onPress={handleSettings} />
                     <View style={s.carLight}>
-                        <Image
-                            source={require("../assets/carLight.png")}
-                            style={s.carLightImg}
-                        />
+                        <TouchableOpacity onPress={handleImagePress}>
+                            {pressImg ? (
+                                <View>
+                                    <Text style={s.carLightText}>Model 3</Text>
+                                    <Image
+                                        source={require("../assets/carLightBig.png")}
+                                        style={s.carLightBigImg}
+                                    />
+                                </View>
+                            ) : (
+                                <Image
+                                    source={require("../assets/carLight.png")}
+                                    style={s.carLightImg}
+                                />
+                            )}
+                        </TouchableOpacity>
                     </View>
                     <LinearGradient
                         colors={["#18191B", "#18191B"]}
@@ -43,26 +64,29 @@ const UnlockPage: FC<any> = ({ navigation }) => {
 };
 
 const s = StyleSheet.create({
-    container: {
-        width: "100%",
-        height: "100%",
-        marginTop: 25, // test
-    },
-    wrapper: {
-        paddingTop: 25, // test
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-    },
     carLight: {
-        marginTop: 130,
-        marginBottom: 172,
+        // marginTop: 130,
+        // marginBottom: 172,
+    },
+    carLightText: {
+        color: "#FFF",
+        textAlign: "center",
+        fontSize: 40,
+        fontWeight: "700",
+        lineHeight: 41,
+        marginTop: 40,
+    },
+    carLightBigImg: {
+        width: 407,
+        height: 330,
+        marginTop: 50,
+        marginBottom: 50,
     },
     carLightImg: {
         width: 256,
         height: 208,
+        marginTop: 130,
+        marginBottom: 172,
     },
     unlockGradient: {
         display: "flex",
