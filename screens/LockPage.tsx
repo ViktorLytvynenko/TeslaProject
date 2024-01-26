@@ -11,14 +11,14 @@ const LockPage: FC<any> = ({ navigation }) => {
     };
 
     return (
-        <View style={stylesBase.container}>
-            <LinearGradient
-                colors={["#292C31", "#000", "#000", "#292929"]}
-                locations={[0, 0.3009, 0.5735, 1]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={stylesBase.container}
-            >
+        <LinearGradient
+            colors={["#292C31", "#000", "#000", "#292929"]}
+            locations={[0, 0.3009, 0.5735, 1]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={stylesBase.containerGradient}
+        >
+            <View style={stylesBase.container}>
                 <View style={stylesBase.wrapper}>
                     <View style={s.carDark}>
                         <Image
@@ -38,8 +38,8 @@ const LockPage: FC<any> = ({ navigation }) => {
                         />
                     </LinearGradient>
                 </View>
-            </LinearGradient>
-        </View>
+            </View>
+        </LinearGradient>
     );
 };
 

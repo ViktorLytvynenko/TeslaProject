@@ -18,14 +18,14 @@ const UnlockPage: FC<any> = ({ navigation }) => {
         navigation.navigate("HomePage");
     };
     return (
-        <View style={stylesBase.container}>
-            <LinearGradient
-                colors={["#2A2D32", "#161719"]}
-                locations={[0, 0.9917]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={stylesBase.container}
-            >
+        <LinearGradient
+            colors={["#2A2D32", "#161719"]}
+            locations={[0, 0.9917]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={stylesBase.containerGradient}
+        >
+            <View style={stylesBase.container}>
                 <View style={stylesBase.wrapper}>
                     <Settings onPress={handleSettings} />
                     <View style={s.carLight}>
@@ -58,8 +58,8 @@ const UnlockPage: FC<any> = ({ navigation }) => {
                         />
                     </LinearGradient>
                 </View>
-            </LinearGradient>
-        </View>
+            </View>
+        </LinearGradient>
     );
 };
 

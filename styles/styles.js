@@ -4,7 +4,15 @@ const stylesBase = StyleSheet.create({
     container: {
         width: "100%",
         height: "100%",
-        marginTop: 25, // test
+        paddingLeft: 30,
+        paddingRight: 30,
+        // marginTop: 25, // test
+    },
+    containerGradient: {
+        width: "100%",
+        height: "100%",
+        paddingTop: 25,
+        paddingBottom: 25,
     },
     wrapper: {
         paddingTop: 25, // test
