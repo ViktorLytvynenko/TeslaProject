@@ -1,8 +1,12 @@
 import { FC } from "react";
-import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import {
+    View,
+    StyleSheet,
+    TouchableWithoutFeedback,
+    Image,
+} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
 
 interface IOptionsCar {
     onPressLock: () => void;
@@ -33,7 +37,10 @@ const OptionsCar: FC<IOptionsCar> = ({
                 />
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={onPressControl}>
-                <Ionicons name="car-sport-outline" size={34} color="#808080" />
+                <Image
+                    source={require("../assets/openTrunk.png")}
+                    style={s.carTrunk}
+                />
             </TouchableWithoutFeedback>
         </View>
     );
@@ -45,7 +52,7 @@ const s = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "row",
-        gap: 38,
+        gap: 36,
         borderRadius: 50,
         backgroundColor: "#27282A",
         width: 330,
@@ -53,6 +60,10 @@ const s = StyleSheet.create({
         marginRight: "auto",
         paddingTop: 30,
         paddingBottom: 30,
+    },
+    carTrunk: {
+        width: 60,
+        height: 60,
     },
 });
 export default OptionsCar;

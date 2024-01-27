@@ -5,10 +5,10 @@ import {
     Text,
     StyleSheet,
     TouchableWithoutFeedback,
+    Image,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
 interface IControlContent {
@@ -90,11 +90,9 @@ const ControlContent: FC<IControlContent> = ({
                 <TouchableWithoutFeedback onPress={onPressControl}>
                     <View style={s.controlItems}>
                         <View style={s.controlOption}>
-                            <Ionicons
-                                name="car-sport-outline"
-                                size={34}
-                                color="#808080"
-                                style={s.conrolImg}
+                            <Image
+                                source={require("../assets/openTrunk.png")}
+                                style={s.carTrunk}
                             />
                             <Text style={s.controlText}>Control</Text>
                         </View>
@@ -148,6 +146,10 @@ const s = StyleSheet.create({
         fontWeight: "600",
         lineHeight: 24,
         letterSpacing: 0.38,
+    },
+    carTrunk: {
+        width: 60,
+        height: 60,
     },
     conrolImg: {
         marginRight: 20,
