@@ -45,10 +45,10 @@ const HomePage: FC<any> = ({navigation}) => {
                         <Text style={s.batteryText}>187 km</Text>
                     </View>
                 </View>
-                <TouchableWithoutFeedback>
+                <TouchableWithoutFeedback style={s.accountContainer}>
                     <Image
                         source={require("../assets/acount.png")}
-                        style={s.acountBtn}
+                        style={s.accountBtn}
                     />
                 </TouchableWithoutFeedback>
             </View>
@@ -103,7 +103,12 @@ const s = StyleSheet.create({
         lineHeight: 22,
         letterSpacing: -0.408,
     },
-    acountBtn: {
+    accountContainer: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    accountBtn: {
         width: 72,
         height: 72,
     },
