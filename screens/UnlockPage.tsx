@@ -1,11 +1,11 @@
-import { FC, useState } from "react";
-import { View, StyleSheet, Image, TouchableOpacity, Text } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import {FC, useState} from "react";
+import {View, StyleSheet, Image, TouchableOpacity, Text} from "react-native";
+import {LinearGradient} from "expo-linear-gradient";
 import Settings from "../components/Settings";
 import ButtonLock from "../components/ButtonLock";
 import stylesBase from "../styles/styles";
 
-const UnlockPage: FC<any> = ({ navigation }) => {
+const UnlockPage: FC<any> = ({navigation}) => {
     const [pressImg, setPressImg] = useState(false);
 
     const onPress = () => {
@@ -21,13 +21,13 @@ const UnlockPage: FC<any> = ({ navigation }) => {
         <LinearGradient
             colors={["#2A2D32", "#161719"]}
             locations={[0, 0.9917]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 1}}
             style={stylesBase.containerGradient}
         >
             <View style={stylesBase.container}>
                 <View style={stylesBase.wrapper}>
-                    <Settings onPress={handleSettings} />
+                    <Settings onPress={handleSettings}/>
                     <View style={s.carLight}>
                         <TouchableOpacity onPress={handleImagePress}>
                             {pressImg ? (

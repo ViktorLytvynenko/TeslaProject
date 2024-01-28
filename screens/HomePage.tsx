@@ -5,20 +5,32 @@ import {
     TouchableWithoutFeedback,
     Image,
 } from "react-native";
-import { FC } from "react";
-import { FontAwesome } from "@expo/vector-icons";
+import {FC} from "react";
+import {FontAwesome} from "@expo/vector-icons";
 import stylesBase from "../styles/styles";
-import { LinearGradient } from "expo-linear-gradient";
+import {LinearGradient} from "expo-linear-gradient";
 import OptionsCar from "../components/OptionsCar";
 import ControlContent from "../components/ControlContent";
 
-const HomePage: FC<any> = () => {
+const HomePage: FC<any> = ({navigation}) => {
+    const onPressLock = () => {
+        navigation.navigate("OpenCarPage");
+    }
+    const onPressClimate = () => {
+        navigation.navigate("ClimateCarPage");
+    }
+    const onPressCharge = () => {
+        navigation.navigate("ChargeCarPage");
+    }
+    const onPressControl = () => {
+        navigation.navigate("ControlCarPage");
+    }
     return (
         <LinearGradient
             colors={["#292C31", "#292C31", "#2D2C31"]}
             locations={[0, 0.7287, 1]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 1}}
             style={stylesBase.containerGradient}
         >
             <View style={s.infoCar}>
@@ -45,9 +57,18 @@ const HomePage: FC<any> = () => {
                 style={s.carHomeImg}
             />
             <View style={s.optionCar}>
-                <OptionsCar />
+                <OptionsCar
+                    onPressLock={onPressLock}
+                    onPressCharge={onPressLock}
+                    onPressControl={onPressControl}
+                    onPressClimate={onPressClimate}/>
             </View>
-            <ControlContent />
+            <ControlContent
+                onPressLock={onPressLock}
+                onPressCharge={onPressLock}
+                onPressControl={onPressControl}
+                onPressClimate={onPressClimate}
+            />
         </LinearGradient>
     );
 };
@@ -62,7 +83,7 @@ const s = StyleSheet.create({
         paddingRight: 30,
         marginBottom: 10,
     },
-    aboutCar: { gap: 8 },
+    aboutCar: {gap: 8},
     carName: {
         color: "#FFF",
         fontSize: 28,
