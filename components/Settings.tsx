@@ -1,11 +1,12 @@
-import { FC } from "react";
-import { TouchableWithoutFeedback, Image, StyleSheet } from "react-native";
+import {FC} from "react";
+import {TouchableWithoutFeedback, Image, StyleSheet} from "react-native";
 
 interface ISettings {
     onPress: () => void;
 }
 
-const Settings: FC<ISettings> = ({ onPress }) => {
+const Settings: FC<any> = ({onPress}) => {
+
     return (
         <TouchableWithoutFeedback style={s.settings} onPress={onPress}>
             <Image
