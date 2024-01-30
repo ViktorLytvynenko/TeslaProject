@@ -1,12 +1,15 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import {View, Text, StyleSheet} from "react-native";
 import stylesBase from "../styles/styles";
-import { LinearGradient } from "expo-linear-gradient";
+import {LinearGradient} from "expo-linear-gradient";
 import ButtonBack from "../components/ButtonBack";
-import { FC } from "react";
+import {FC} from "react";
 import Settings from "../components/Settings";
-import RangeCircle from "../components/RangeCircle";
 
-const ClimateCarPage: FC<any> = ({ navigation }) => {
+import {ClimateRange} from "../assets/icons/icons";
+import ClimateParamsAc from "../components/ClimateParamsAc";
+import ClimateParamsFan from "../components/ClimateParamsFan";
+
+const ClimateCarPage: FC<any> = ({navigation}) => {
     const onPressGoBack = () => {
         navigation.goBack();
     };
@@ -14,22 +17,22 @@ const ClimateCarPage: FC<any> = ({ navigation }) => {
         <LinearGradient
             colors={["#292C31", "#292C31", "#2D2C31"]}
             locations={[0, 0.7287, 1]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 1}}
             style={stylesBase.containerGradient}
         >
             <View style={stylesBase.container}>
                 <View style={s.climateContainer}>
-                    <ButtonBack onPress={onPressGoBack} />
+                    <ButtonBack onPress={onPressGoBack}/>
                     <Text style={s.climateText}>CLIMATE</Text>
-                    <Settings onPress={onPressGoBack} />
+                    <Settings onPress={onPressGoBack}/>
                 </View>
                 <View style={s.climateRangeContainer}>
-                    <RangeCircle />
-                    <Image
-                        source={require("../assets/rangeCircle.png")}
-                        style={s.climateRangeImg}
-                    />
+                    <ClimateRange/>
+                </View>
+                <View style={s.climateParams}>
+                    <ClimateParamsAc/>
+                    <ClimateParamsFan/>
                 </View>
             </View>
         </LinearGradient>
@@ -53,10 +56,7 @@ const s = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    climateRangeImg: {
-        width: 193,
-        height: 193,
-    },
+    climateParams: {}
 });
 
 export default ClimateCarPage;
