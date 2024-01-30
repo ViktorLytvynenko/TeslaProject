@@ -59,15 +59,16 @@ const HomePage: FC<any> = ({navigation}) => {
             <View style={s.optionCar}>
                 <OptionsCar
                     onPressLock={onPressLock}
-                    onPressCharge={onPressLock}
+                    onPressClimate={onPressClimate}
+                    onPressCharge={onPressCharge}
                     onPressControl={onPressControl}
-                    onPressClimate={onPressClimate}/>
+                />
             </View>
             <ControlContent
                 onPressLock={onPressLock}
-                onPressCharge={onPressLock}
-                onPressControl={onPressControl}
                 onPressClimate={onPressClimate}
+                onPressCharge={onPressCharge}
+                onPressControl={onPressControl}
             />
         </LinearGradient>
     );

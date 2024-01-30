@@ -6,8 +6,10 @@ import {FC} from "react";
 import Settings from "../components/Settings";
 
 import {ClimateRange} from "../assets/icons/icons";
-import ClimateParamsAc from "../components/ClimateParamsAc";
-import ClimateParamsFan from "../components/ClimateParamsFan";
+import ClimateParamsAc from "../components/climate/ClimateParamsAc";
+import ClimateParamsFan from "../components/climate/ClimateParamsFan";
+import ClimateParamsHeat from "../components/climate/ClimateParamsHeat";
+import ClimateParamsAuto from "../components/climate/ClimateParamsAuto";
 
 const ClimateCarPage: FC<any> = ({navigation}) => {
     const onPressGoBack = () => {
@@ -33,6 +35,8 @@ const ClimateCarPage: FC<any> = ({navigation}) => {
                 <View style={s.climateParams}>
                     <ClimateParamsAc/>
                     <ClimateParamsFan/>
+                    <ClimateParamsHeat/>
+                    <ClimateParamsAuto/>
                 </View>
             </View>
         </LinearGradient>
