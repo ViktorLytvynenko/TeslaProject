@@ -1,9 +1,6 @@
-import {Text, TouchableOpacity, View} from "react-native";
-import {
-    ClimateSettingAutoBlue, ClimateSettingAutoWhite,
-} from "../../assets/icons/icons";
+import { Text, TouchableOpacity, View, Image, StyleSheet } from "react-native";
 import Slider from "@react-native-community/slider";
-import {useState} from "react";
+import { useState } from "react";
 import stylesClimate from "./stylesClimate";
 
 const ClimateParamsAuto = () => {
@@ -13,26 +10,35 @@ const ClimateParamsAuto = () => {
     };
     return (
         <View style={stylesClimate.climateContainer}>
-            <Text style={stylesClimate.climateText}>
-                Auto
-            </Text>
-            <TouchableOpacity style={stylesClimate.climateSVG} onPress={handlePress}>
-                {activeBtn ? <ClimateSettingAutoBlue/> : <ClimateSettingAutoWhite/>}
+            <Text style={stylesClimate.climateText}>Auto</Text>
+            <TouchableOpacity
+                style={stylesClimate.climateSVG}
+                onPress={handlePress}
+            >
+                {activeBtn ? (
+                    <Image
+                        source={require("../../assets/icons/climateParamsAutoBlue.png")}
+                    />
+                ) : (
+                    <Image
+                        source={require("../../assets/icons/climateParamsAutoWhite.png")}
+                    />
+                )}
             </TouchableOpacity>
             <View style={stylesClimate.climateSlider}>
                 <Slider
-                    style={{width: 200, height: 40}}
+                    style={{ width: 200, height: 40 }}
                     minimumValue={0}
                     maximumValue={1}
                     minimumTrackTintColor="#11A8FD"
                     maximumTrackTintColor="#212325"
-                    thumbTintColor='#212325'
-                    lowerLimit='0'
-                    upperLimit='100'
+                    thumbTintColor="#212325"
+                    lowerLimit={0}
+                    upperLimit={100}
                 />
             </View>
         </View>
-    )
-}
+    );
+};
 
-export default ClimateParamsAuto
+export default ClimateParamsAuto;
