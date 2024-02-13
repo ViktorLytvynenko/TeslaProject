@@ -1,11 +1,9 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import stylesBase from "../styles/styles";
 import { LinearGradient } from "expo-linear-gradient";
 import ButtonBack from "../components/ButtonBack";
 import { FC } from "react";
 import Settings from "../components/Settings";
-
-import { ClimateRange } from "../assets/icons/icons";
 import ClimateParamsAc from "../components/climate/ClimateParamsAc";
 import ClimateParamsFan from "../components/climate/ClimateParamsFan";
 import ClimateParamsHeat from "../components/climate/ClimateParamsHeat";
@@ -27,7 +25,10 @@ const ClimateCarPage: FC<any> = ({ navigation }) => {
             <View style={stylesBase.container}>
                 <TitlePages onPressGoBack={onPressGoBack} text="CLIMATE" />
                 <View style={s.climateRangeContainer}>
-                    <ClimateRange />
+                    <Image
+                        source={require("../assets/icons/climateRange.png")}
+                        style={s.climateRangeImg}
+                    />
                 </View>
                 <View style={s.climateParams}>
                     <ClimateParamsAc />
@@ -58,6 +59,10 @@ const s = StyleSheet.create({
         justifyContent: "center",
     },
     climateParams: {},
+    climateRangeImg: {
+        width: 193,
+        height: 193,
+    },
 });
 
 export default ClimateCarPage;
