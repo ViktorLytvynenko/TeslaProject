@@ -1,6 +1,6 @@
-import { Text, TouchableOpacity, View, Image } from "react-native";
+import {Text, TouchableOpacity, View, Image} from "react-native";
 import Slider from "@react-native-community/slider";
-import { useState } from "react";
+import {useState} from "react";
 import stylesClimate from "./stylesClimate";
 
 const ClimateParamsFan = () => {
@@ -16,18 +16,24 @@ const ClimateParamsFan = () => {
                 onPress={handlePress}
             >
                 {activeBtn ? (
-                    <Image
-                        source={require("../../assets/icons/climateSettingFanBlue.png")}
-                    />
+                    <View style={[stylesClimate.climateIconBorder, stylesClimate.climateIconBorderBlue]}>
+                        <Image
+                            source={require("../../assets/icons/climateSettingFanBlue.png")}
+                            style={stylesClimate.climateIcon}
+                        />
+                    </View>
                 ) : (
-                    <Image
-                        source={require("../../assets/icons/climateSettingFanWhite.png")}
-                    />
+                    <View style={[stylesClimate.climateIconBorder, stylesClimate.climateIconBorderWhite]}>
+                        <Image
+                            source={require("../../assets/icons/climateSettingFanWhite.png")}
+                            style={stylesClimate.climateIcon}
+                        />
+                    </View>
                 )}
             </TouchableOpacity>
             <View style={stylesClimate.climateSlider}>
                 <Slider
-                    style={{ width: 200, height: 40 }}
+                    style={{width: 200, height: 40}}
                     minimumValue={0}
                     maximumValue={1}
                     minimumTrackTintColor="#11A8FD"

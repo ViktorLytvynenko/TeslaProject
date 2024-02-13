@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from "react-native";
 
 const stylesClimate = StyleSheet.create({
     climateContainer: {
@@ -23,12 +23,27 @@ const stylesClimate = StyleSheet.create({
     climateSlider: {
         width: 180,
     },
-    //     climateParamsAutoBlue:{
-    // width:
-    //     },
-    //     climateParamsAutoWhite:{
-
-    //     }
+    climateIconBorder: {
+        width: 50,
+        height: 50,
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 50,
+        borderStyle: "solid",
+        borderWidth: 2,
+    },
+    climateIconBorderWhite: {
+        borderColor: "white"
+    },
+    climateIconBorderBlue: {
+        borderColor: "#11A8FD"
+    },
+    climateIcon: {
+        width: 25,
+        height: 25
+    }
 });
 
 export default stylesClimate;
