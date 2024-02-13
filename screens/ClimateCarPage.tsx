@@ -1,16 +1,14 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import {View, Text, StyleSheet, Image} from "react-native";
 import stylesBase from "../styles/styles";
-import { LinearGradient } from "expo-linear-gradient";
-import ButtonBack from "../components/ButtonBack";
-import { FC } from "react";
-import Settings from "../components/Settings";
+import {LinearGradient} from "expo-linear-gradient";
+import {FC} from "react";
 import ClimateParamsAc from "../components/climate/ClimateParamsAc";
 import ClimateParamsFan from "../components/climate/ClimateParamsFan";
 import ClimateParamsHeat from "../components/climate/ClimateParamsHeat";
 import ClimateParamsAuto from "../components/climate/ClimateParamsAuto";
 import TitlePages from "../components/TitlePages";
 
-const ClimateCarPage: FC<any> = ({ navigation }) => {
+const ClimateCarPage: FC<any> = ({navigation}) => {
     const onPressGoBack = () => {
         navigation.goBack();
     };
@@ -18,23 +16,26 @@ const ClimateCarPage: FC<any> = ({ navigation }) => {
         <LinearGradient
             colors={["#292C31", "#292C31", "#2D2C31"]}
             locations={[0, 0.7287, 1]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 1}}
             style={stylesBase.containerGradient}
         >
             <View style={stylesBase.container}>
-                <TitlePages onPressGoBack={onPressGoBack} text="CLIMATE" />
+                <TitlePages onPressGoBack={onPressGoBack} text="CLIMATE"/>
                 <View style={s.climateRangeContainer}>
-                    <Image
-                        source={require("../assets/icons/climateRange.png")}
-                        style={s.climateRangeImg}
-                    />
+                        <Image
+                            source={require("../assets/icons/climateRange.png")}
+                            style={s.climateRangeImg}
+                        />
+                    <Text
+                        style={s.climateRangeText}>18
+                    </Text>
                 </View>
                 <View style={s.climateParams}>
-                    <ClimateParamsAc />
-                    <ClimateParamsFan />
-                    <ClimateParamsHeat />
-                    <ClimateParamsAuto />
+                    <ClimateParamsAc/>
+                    <ClimateParamsFan/>
+                    <ClimateParamsHeat/>
+                    <ClimateParamsAuto/>
                 </View>
             </View>
         </LinearGradient>
@@ -53,6 +54,7 @@ const s = StyleSheet.create({
         fontWeight: "600",
     },
     climateRangeContainer: {
+        position: "relative",
         paddingTop: 110,
         display: "flex",
         alignItems: "center",
@@ -63,6 +65,15 @@ const s = StyleSheet.create({
         width: 193,
         height: 193,
     },
+    climateRangeText: {
+        position: "absolute",
+        top: 175,
+        left: 138,
+        fontWeight: "400",
+        fontSize: 48,
+        textAlign: "center",
+        color: "#5c5c62"
+    }
 });
 
 export default ClimateCarPage;
