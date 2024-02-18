@@ -17,7 +17,7 @@ const ButtonLock: FC<IButtonLock> = ({ text, onPress, img }) => {
     return (
         <View style={s.lockContainer}>
             <Text style={s.lockText}>{text}</Text>
-            <TouchableWithoutFeedback style={s.lockBtn} onPress={onPress}>
+            <TouchableWithoutFeedback onPress={onPress}>
                 <Image source={img} style={s.lockImg} />
             </TouchableWithoutFeedback>
         </View>
@@ -41,10 +41,6 @@ const s = StyleSheet.create({
         letterSpacing: -0.408,
         paddingHorizontal: 20,
     },
-    // lockBtn: {
-    //     width: 72,
-    //     height: 72,
-    // },
     lockImg: {
         marginTop: 7,
         width: 72,

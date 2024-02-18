@@ -28,6 +28,31 @@ const ChargeCarPage: FC<any> = ({ navigation }) => {
                     <Text style={s.chargeTextCounter}>65</Text>
                     <Text style={s.chargeTextPercent}>%</Text>
                 </View>
+                <View style={s.carChargeContainer}>
+                    <Image
+                        style={s.batteryBase}
+                        source={require("../assets/icons/batteryBase.png")}
+                    />
+                    <Image
+                        style={s.batteryCharge}
+                        source={require("../assets/icons/batteryCharge.png")}
+                    />
+                </View>
+
+                <View style={s.carBatteryVolume}>
+                    <View style={s.carBatteryRange}>
+                        <View style={s.carBatteryRangeMin}></View>
+                        <Text style={s.carBatteryVolumeMin}>0%</Text>
+                    </View>
+                    <View style={s.carBatteryRange}>
+                        <View style={s.carBatteryRangeMid}></View>
+                        <Text style={s.carBatteryVolumeMid}>50%</Text>
+                    </View>
+                    <View style={s.carBatteryRange}>
+                        <View style={s.carBatteryRangeMax}></View>
+                        <Text style={s.carBatteryVolumeMax}>100%</Text>
+                    </View>
+                </View>
             </View>
         </LinearGradient>
     );
@@ -36,10 +61,14 @@ const s = StyleSheet.create({
     carImage: {
         width: 322,
         height: 221,
+        marginTop: 80,
+        marginBottom: 50,
     },
     chargeText: {
         display: "flex",
         flexDirection: "row",
+        justifyContent: "center",
+        marginBottom: 30,
     },
     chargeTextCounter: {
         fontSize: 20,
@@ -50,6 +79,69 @@ const s = StyleSheet.create({
         color: "rgba(235, 235, 245, 0.60))",
         fontSize: 16,
         fontWeight: "400",
+    },
+    carChargeContainer: {
+        width: 275,
+        height: 41,
+        position: "relative",
+        marginLeft: "auto",
+        marginRight: "auto",
+        marginBottom: 20,
+    },
+    batteryBase: {
+        width: "100%",
+        height: "100%",
+    },
+    batteryCharge: {
+        width: "65%",
+        height: "100%",
+        position: "absolute",
+        top: 0,
+        left: 0,
+    },
+    carBatteryVolume: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        fontWeight: "400",
+        fontSize: 13,
+        lineHeight: 22,
+        marginTop: 8,
+    },
+    carBatteryRange: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    carBatteryRangeMin: {
+        width: 2,
+        height: 10,
+        backgroundColor: "rgba(235, 235, 245, 0.6)",
+        marginLeft: 25,
+    },
+    carBatteryRangeMid: {
+        width: 2,
+        height: 10,
+        backgroundColor: "rgba(235, 235, 245, 0.8)",
+    },
+    carBatteryRangeMax: {
+        width: 2,
+        height: 10,
+        backgroundColor: "#fff",
+        marginRight: 25,
+    },
+
+    carBatteryVolumeMin: {
+        paddingLeft: 25,
+
+        color: "rgba(235, 235, 245, 0.6)",
+    },
+    carBatteryVolumeMid: {
+        color: "rgba(235, 235, 245, 0.8)",
+    },
+    carBatteryVolumeMax: {
+        paddingRight: 10,
+        color: "#fff",
     },
 });
 
