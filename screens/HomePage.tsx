@@ -25,6 +25,9 @@ const HomePage: FC<any> = ({ navigation }) => {
     const onPressControl = () => {
         navigation.navigate("ControlCarPage");
     };
+    const onPressCabinet = () => {
+        navigation.navigate("CabinetPage");
+    };
     return (
         <LinearGradient
             colors={["#292C31", "#292C31", "#2D2C31"]}
@@ -45,7 +48,7 @@ const HomePage: FC<any> = ({ navigation }) => {
                         <Text style={s.batteryText}>187 km</Text>
                     </View>
                 </View>
-                <TouchableWithoutFeedback style={s.accountContainer}>
+                <TouchableWithoutFeedback style={s.accountContainer} onPress={onPressCabinet}>
                     <Image
                         source={require("../assets/acount.png")}
                         style={s.accountBtn}
