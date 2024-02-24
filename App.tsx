@@ -7,6 +7,9 @@ import OpenCarPage from "./screens/OpenCarPage";
 import ClimateCarPage from "./screens/ClimateCarPage";
 import ChargeCarPage from "./screens/ChargeCarPage";
 import ControlCarPage from "./screens/ControlCarPage";
+import CabinetPage from "./screens/CabinetPage";
+import SignUpPage from "./screens/SignUpPage";
+import SignInPage from "./screens/SignInPage";
 
 export default function App() {
     const Stack = createNativeStackNavigator();
@@ -53,6 +56,21 @@ export default function App() {
                     component={ControlCarPage}
                     options={{headerShown: false}}
                 />
+                <Stack.Screen
+                    name="CabinetPage"
+                    component={CabinetPage}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="SignInPage"
+                    component={SignInPage}
+                    options={{headerShown: false}}
+                />
+           <Stack.Screen
+               name="SignUpPage"
+               component={SignUpPage}
+               options={{headerShown: false}}
+           />
             </Stack.Navigator>
         </NavigationContainer>
     );

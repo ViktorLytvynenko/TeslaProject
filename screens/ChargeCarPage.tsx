@@ -1,9 +1,7 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import stylesBase from "../styles/styles";
 import { LinearGradient } from "expo-linear-gradient";
-import ButtonBack from "../components/ButtonBack";
 import { FC } from "react";
-import Settings from "../components/Settings";
 import TitlePages from "../components/TitlePages";
 
 const ChargeCarPage: FC<any> = ({ navigation }) => {
