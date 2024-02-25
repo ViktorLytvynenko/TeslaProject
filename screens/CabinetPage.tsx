@@ -8,6 +8,9 @@ const CabinetPage: FC<any> = ({navigation}) => {
     const onPressGoBack = () => {
         navigation.goBack();
     }
+    const onPressSignIn = () => {
+        navigation.navigate("SignInPage");
+    }
     const onPressSignUp = () => {
         navigation.navigate("SignUpPage");
     }
@@ -27,6 +30,14 @@ const CabinetPage: FC<any> = ({navigation}) => {
                         style={s.usersImage}
                     />
                 </View>
+                <TouchableOpacity
+                    style={s.btnContainer}
+                    onPress={onPressSignIn}
+                >
+                    <Text style={s.btnText}>
+                        Sign in
+                    </Text>
+                </TouchableOpacity>
                 <TouchableOpacity
                     style={s.btnContainer}
                     onPress={onPressSignUp}
@@ -54,10 +65,11 @@ const s = StyleSheet.create({
     btnContainer: {
         width: "100%",
         height: 50,
+        marginBottom: 10,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#2e6ff2"
+        backgroundColor: "#27282A"
     },
     btnText: {
         color: "#fff"

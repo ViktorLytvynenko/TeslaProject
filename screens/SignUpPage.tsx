@@ -3,47 +3,19 @@ import stylesBase from "../styles/styles";
 import TitlePages from "../components/TitlePages";
 import {LinearGradient} from "expo-linear-gradient";
 import {View, TextInput, StyleSheet, Text, TouchableOpacity} from "react-native";
-import {useFormik} from "formik";
+import {Formik} from 'formik';
 import * as Yup from 'yup'
 
 const SignUpPage: FC<any> = ({navigation}) => {
     const onPressGoBack = () => {
         navigation.goBack();
     }
-    const formik = useFormik({
-        initialValues: {
-            country: '',
-            firstName: '',
-            lastName: '',
-            phone: '',
-            email: ''
-        },
-        validationSchema: Yup.object({
-            country: Yup.string()
-                .min(3, 'There should be more characters')
-                .max(50, 'There should be less characters')
-                .required('Write please your Country'),
-            firstName: Yup.string()
-                .min(1, 'There should be more characters')
-                .max(50, 'There should be less characters')
-                .required('Write please your First Name'),
-            lastName: Yup.string()
-                .min(1, 'There should be more characters')
-                .max(50, 'There should be less characters')
-                .required('Write please your Last Name'),
-            phone: Yup.string()
-                .min(1, 'There should be more characters')
-                .max(50, 'There should be less characters')
-                .required('Write please your Phone'),
-            email: Yup.string().email()
-                .min(5, 'There should be more characters')
-                .max(50, 'There should be less characters')
-                .required('Write please your Email'),
-        }),
-        onSubmit: (values) => {
-            console.log("123" + values)
-        }
-    })
+    const SignUpSchema = Yup.object().shape({
+        email: Yup.string().email('Invalid email').required('Email is required'),
+        phone: Yup.string().required('Phone is required'),
+        firstName: Yup.string().required('First name is required'),
+        lastName: Yup.string().required('Last name is required'),
+    });
     return (
         <LinearGradient
             colors={["#292C31", "#292C31", "#2D2C31"]}
@@ -54,70 +26,96 @@ const SignUpPage: FC<any> = ({navigation}) => {
         >
             <View style={stylesBase.container}>
                 <TitlePages onPressGoBack={onPressGoBack} text="CABINET"/>
-                <View>
-                    <TextInput
-                        id="country"
-                        name="country"
-                        placeholder="Country"
-                        placeholderTextColor="#acafb5"
-                        onChange={formik.handleChange}
-                        type="text"
-                        style={s.input}
-                    />
-                    <TextInput
-                        id="firstName"
-                        name="firstName"
-                        placeholder="First Name"
-                        placeholderTextColor="#acafb5"
-                        onChange={formik.handleChange}
-                        type="text"
-                        style={s.input}
-                    />
-                    <TextInput
-                        id="lastName"
-                        name="lastName"
-                        placeholder="Last Name"
-                        placeholderTextColor="#acafb5"
-                        onChange={formik.handleChange}
-                        type="text"
-                        style={s.input}
-                    />
-                    <TextInput
-                        id="phone"
-                        name="phone"
-                        placeholder="Phone"
-                        placeholderTextColor="#acafb5"
-                        onChange={formik.handleChange}
-                        type="text"
-                        style={s.input}
-                    />
-                    <TextInput
-                        id="email"
-                        name="email"
-                        placeholder="Email"
-                        placeholderTextColor="#acafb5"
-
-                        style={s.input}
-                    />
-                    <TouchableOpacity
-                        style={s.btn}
-                    >
-                        <Text style={s.btnText}>Submit</Text>
-                    </TouchableOpacity>
-                </View>
+                <Formik
+                    initialValues={{
+                        email: '',
+                        phone: '',
+                        firstName: '',
+                        lastName: ''
+                    }}
+                    onSubmit={values => console.log(values)}
+                    validationSchema={SignUpSchema}
+                >
+                    {({handleChange, handleBlur, handleSubmit, values, errors, touched}) => (
+                        <View style={s.inputContainer}>
+                            <TextInput
+                                onChangeText={handleChange('email')}
+                                onBlur={handleBlur('email')}
+                                value={values.email}
+                                placeholder="Email"
+                                placeholderTextColor="#acafb5"
+                                style={s.input}
+                            />
+                            {errors.email && touched.email && <Text style={{ color: 'red' }}>{errors.email}</Text>}
+                            <TextInput
+                                onChangeText={handleChange('phone')}
+                                onBlur={handleBlur('phone')}
+                                value={values.phone}
+                                placeholder="Phone"
+                                placeholderTextColor="#acafb5"
+                                style={s.input}
+                            />
+                            {errors.phone && touched.phone && <Text style={{ color: 'red' }}>{errors.phone}</Text>}
+                            <TextInput
+                                onChangeText={handleChange('firstName')}
+                                onBlur={handleBlur('firstName')}
+                                value={values.firstName}
+                                placeholder="First name"
+                                placeholderTextColor="#acafb5"
+                                style={s.input}
+                            />
+                            {errors.firstName && touched.firstName && <Text style={{ color: 'red' }}>{errors.firstName}</Text>}
+                            <TextInput
+                                onChangeText={handleChange('lastName')}
+                                onBlur={handleBlur('lastName')}
+                                value={values.lastName}
+                                placeholder="Last name"
+                                placeholderTextColor="#acafb5"
+                                style={s.input}
+                            />
+                            {errors.lastName && touched.lastName && <Text style={{ color: 'red' }}>{errors.lastName}</Text>}
+                            <TouchableOpacity
+                                onPress={handleSubmit}
+                                title="Submit"
+                                style={s.btn}
+                            >
+                                <Text
+                                    style={s.btnText}>
+                                    Submit
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    )}
+                </Formik>
             </View>
         </LinearGradient>
     )
 }
 
 const s = StyleSheet.create({
+    inputContainer: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        rowGap: 10,
+        marginTop: 20
+    },
     input: {
-        color: "#fff"
+        width: "100%",
+        height: 40,
+        color: "#fff",
+        backgroundColor: "#27282A",
+        padding: 0,
+        paddingLeft: 10
     },
     btn: {
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        width: "100%",
+        height: 40,
+        marginTop: 20,
+        backgroundColor: "#27282A"
     },
     btnText: {
         color: "#fff"
