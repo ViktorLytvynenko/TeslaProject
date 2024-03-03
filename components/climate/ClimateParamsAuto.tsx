@@ -1,6 +1,6 @@
-import {Text, TouchableOpacity, View, Image} from "react-native";
+import { Text, TouchableOpacity, View, Image } from "react-native";
 import Slider from "@react-native-community/slider";
-import {useState} from "react";
+import { useState } from "react";
 import stylesClimate from "./stylesClimate";
 
 const ClimateParamsAuto = () => {
@@ -16,14 +16,24 @@ const ClimateParamsAuto = () => {
                 onPress={handlePress}
             >
                 {activeBtn ? (
-                    <View style={[stylesClimate.climateIconBorder, stylesClimate.climateIconBorderBlue]}>
+                    <View
+                        style={[
+                            stylesClimate.climateIconBorder,
+                            stylesClimate.climateIconBorderBlue,
+                        ]}
+                    >
                         <Image
                             source={require("../../assets/icons/climateParamsAutoBlue.png")}
                             style={stylesClimate.climateIcon}
                         />
                     </View>
                 ) : (
-                    <View style={[stylesClimate.climateIconBorder, stylesClimate.climateIconBorderWhite]}>
+                    <View
+                        style={[
+                            stylesClimate.climateIconBorder,
+                            stylesClimate.climateIconBorderWhite,
+                        ]}
+                    >
                         <Image
                             source={require("../../assets/icons/climateParamsAutoWhite.png")}
                             style={stylesClimate.climateIcon}
@@ -33,14 +43,14 @@ const ClimateParamsAuto = () => {
             </TouchableOpacity>
             <View style={stylesClimate.climateSlider}>
                 <Slider
-                    style={{width: 200, height: 40}}
+                    style={{ width: 200, height: 40 }}
                     minimumValue={0}
                     maximumValue={1}
                     minimumTrackTintColor="#11A8FD"
                     maximumTrackTintColor="#212325"
                     thumbTintColor="#212325"
-                    lowerLimit={0}
-                    upperLimit={100}
+                    lowerLimit={16}
+                    upperLimit={30}
                 />
             </View>
         </View>

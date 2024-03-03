@@ -7,8 +7,11 @@ import ClimateParamsFan from "../components/climate/ClimateParamsFan";
 import ClimateParamsHeat from "../components/climate/ClimateParamsHeat";
 import ClimateParamsAuto from "../components/climate/ClimateParamsAuto";
 import TitlePages from "../components/TitlePages";
+import { useSelector } from "react-redux";
+import { RootStateType } from "../redux/store";
 
 const ClimateCarPage: FC<any> = ({ navigation }) => {
+    const params = useSelector((state: RootStateType) => state.climate.ac);
     const onPressGoBack = () => {
         navigation.goBack();
     };
@@ -27,7 +30,7 @@ const ClimateCarPage: FC<any> = ({ navigation }) => {
                         source={require("../assets/icons/climateRange.png")}
                         style={s.climateRangeImg}
                     />
-                    <Text style={s.climateRangeText}>18</Text>
+                    <Text style={s.climateRangeText}>{params.value}</Text>
                 </View>
                 <View style={s.climateParams}>
                     <ClimateParamsAc />

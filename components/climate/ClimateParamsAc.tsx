@@ -3,12 +3,19 @@ import { Text, TouchableOpacity, View, Image } from "react-native";
 import Slider from "@react-native-community/slider";
 import { useState } from "react";
 import stylesClimate from "./stylesClimate";
+import { useDispatch, useSelector } from "react-redux";
+import { RootStateType } from "../../redux/store";
 
 const ClimateParamsAc = () => {
     const [activeBtn, setActiveBtn] = useState(false);
+    const params = useSelector((state: RootStateType) => state.climate.ac);
+    const dispatch = useDispatch();
     const handlePress = () => {
         setActiveBtn(!activeBtn);
     };
+    // const changeSlider = (value)=>{
+    //     console.log(value);
+    // }
     return (
         <View style={stylesClimate.climateContainer}>
             <Text style={stylesClimate.climateText}>Ac</Text>
@@ -50,8 +57,9 @@ const ClimateParamsAc = () => {
                     minimumTrackTintColor="#11A8FD"
                     maximumTrackTintColor="#212325"
                     thumbTintColor="#212325"
-                    lowerLimit={0}
-                    upperLimit={100}
+                    lowerLimit={16}
+                    upperLimit={30}
+                    // onValueChange={changeSlider(params)}
                 />
             </View>
         </View>

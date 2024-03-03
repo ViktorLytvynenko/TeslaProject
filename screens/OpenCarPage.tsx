@@ -2,13 +2,20 @@ import { LinearGradient } from "expo-linear-gradient";
 import { View, Image, StyleSheet } from "react-native";
 import stylesBase from "../styles/styles";
 import TitlePages from "../components/TitlePages";
-import { FC, useState } from "react";
+import { FC } from "react";
 import ButtonLock from "../components/ButtonLock";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleStatusOpenCar } from "../redux/slices/statusCar";
+import { RootStateType } from "../redux/store";
 
 const OpenCarPage: FC<any> = ({ navigation }) => {
-    const [openCar, setOpenCar] = useState(false);
+    const openCar: boolean = useSelector(
+        (state: RootStateType) => state.car.statusOpenCar
+    );
+
+    const dispatch = useDispatch();
     const onPressOpenCar = () => {
-        setOpenCar(!openCar);
+        dispatch(toggleStatusOpenCar());
     };
     const onPressGoBack = () => {
         navigation.goBack();

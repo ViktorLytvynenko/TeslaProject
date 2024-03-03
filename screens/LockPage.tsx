@@ -4,10 +4,14 @@ import { LinearGradient } from "expo-linear-gradient";
 import Settings from "../components/Settings";
 import ButtonLock from "../components/ButtonLock";
 import stylesBase from "../styles/styles";
+import { useDispatch } from "react-redux";
+import { toggleStatusApp } from "../redux/slices/statusCar";
 
 const LockPage: FC<any> = ({ navigation }) => {
+    const dispatch = useDispatch();
     const onPress = () => {
         navigation.navigate("UnlockPage");
+        dispatch(toggleStatusApp());
     };
 
     return (
