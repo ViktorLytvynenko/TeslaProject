@@ -5,14 +5,9 @@ import stylesClimate from "./stylesClimate";
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../../redux/store";
 
-const ClimateParamsFan = () => {
-    const [activeBtn, setActiveBtn] = useState(false);
+const ClimateParamsFan = ({onPressBtnFan}) => {
     const params = useSelector((state: RootStateType) => state.climate.fan);
-    const dispatch = useDispatch();
 
-    const handlePress = () => {
-        setActiveBtn(!activeBtn);
-    };
     const handleSliderChange = (value: number) => {
         console.log("Slider value:", value);
     };
@@ -21,9 +16,9 @@ const ClimateParamsFan = () => {
             <Text style={stylesClimate.climateText}>Fan</Text>
             <TouchableOpacity
                 style={stylesClimate.climateSVG}
-                onPress={handlePress}
+                onPress={onPressBtnFan}
             >
-                {activeBtn ? (
+                {params.status === "on" ? (
                     <View
                         style={[
                             stylesClimate.climateIconBorder,
