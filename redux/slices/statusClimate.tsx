@@ -19,11 +19,11 @@ interface IChangeAction {
 const initialState: IStateClimate = {
     ac: {
         status: "off",
-        value: 16,
+        value: 20,
     },
     fan: {
         status: "off",
-        value: 1,
+        value: 0,
     },
     heat: {
         status: "off",

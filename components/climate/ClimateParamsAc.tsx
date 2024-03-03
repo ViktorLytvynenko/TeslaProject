@@ -54,6 +54,7 @@ const ClimateParamsAc = () => {
                     style={{ width: 200, height: 40 }}
                     minimumValue={16}
                     maximumValue={30}
+                    value={params.value}
                     step={1}
                     minimumTrackTintColor="#11A8FD"
                     maximumTrackTintColor="#212325"
