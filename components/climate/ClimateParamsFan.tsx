@@ -2,9 +2,14 @@ import { Text, TouchableOpacity, View, Image } from "react-native";
 import Slider from "@react-native-community/slider";
 import { useState } from "react";
 import stylesClimate from "./stylesClimate";
+import {useDispatch, useSelector} from "react-redux";
+import {RootStateType} from "../../redux/store";
 
 const ClimateParamsFan = () => {
     const [activeBtn, setActiveBtn] = useState(false);
+    const params = useSelector((state: RootStateType) => state.climate.fan);
+    const dispatch = useDispatch();
+
     const handlePress = () => {
         setActiveBtn(!activeBtn);
     };
@@ -50,6 +55,7 @@ const ClimateParamsFan = () => {
                     minimumValue={0}
                     maximumValue={7}
                     step={1}
+                    value={params.value}
                     minimumTrackTintColor="#11A8FD"
                     maximumTrackTintColor="#212325"
                     thumbTintColor="#212325"
