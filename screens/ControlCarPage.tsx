@@ -3,20 +3,25 @@ import stylesBase from "../styles/styles";
 import {LinearGradient} from "expo-linear-gradient";
 import TitlePages from "../components/TitlePages";
 import {FC, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {RootStateType} from "../redux/store";
+import {toggleStatusHoodOpen, toggleStatusRoofOpen, toggleStatusTrunkOpen} from "../redux/slices/statusDoors";
 
 
 const ControlCarPage: FC<any> = ({navigation}) => {
-    const [openHood, setOpenHood] = useState("Open");
-    const [openTrunk, setOpenTrunk] = useState("Open");
-    const [openRoof, setOpenRoof] = useState("Open");
+    const statusHood = useSelector((state: RootStateType) => state.doors.statusHood);
+    const statusTrunk = useSelector((state: RootStateType) => state.doors.statusTrunk);
+    const statusRoof = useSelector((state: RootStateType) => state.doors.statusRoof);
+    const dispatch = useDispatch();
+
     const toggleHood = () => {
-        setOpenHood(openHood === "Open" ? "Close" : "Open");
+        dispatch(toggleStatusHoodOpen())
     }
     const toggleTrunk = () => {
-        setOpenTrunk(openTrunk === "Open" ? "Close" : "Open");
+        dispatch(toggleStatusTrunkOpen())
     }
     const toggleRoof = () => {
-        setOpenRoof(openRoof === "Open" ? "Close" : "Open");
+        dispatch(toggleStatusRoofOpen())
     }
     const onPressGoBack = () => {
         navigation.goBack();
@@ -37,19 +42,16 @@ const ControlCarPage: FC<any> = ({navigation}) => {
                         style={s.carImage}
                     />
                     <TouchableOpacity style={s.carHood} onPress={toggleHood}>
-                        <Text style={s.carHoodText}>
-                            {openHood}
-                        </Text>
+                        {statusHood ? <Text style={s.carHoodText}>Close</Text> :
+                            <Text style={s.carHoodText}>Open</Text>}
                     </TouchableOpacity>
                     <TouchableOpacity style={s.carTrunk} onPress={toggleTrunk}>
-                        <Text style={s.carTrunkText}>
-                            {openTrunk}
-                        </Text>
+                        {statusTrunk ? <Text style={s.carTrunkText}>Close</Text> :
+                            <Text style={s.carTrunkText}>Open</Text>}
                     </TouchableOpacity>
                     <TouchableOpacity style={s.carRoof} onPress={toggleRoof}>
-                        <Text style={s.carRoofText}>
-                            {openRoof}
-                        </Text>
+                        {statusRoof ? <Text style={s.carRoofText}>Close</Text> :
+                            <Text style={s.carRoofText}>Open</Text>}
                     </TouchableOpacity>
                 </View>
             </View>
