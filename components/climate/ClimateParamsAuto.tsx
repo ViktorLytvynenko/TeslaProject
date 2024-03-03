@@ -1,12 +1,15 @@
-import { Text, TouchableOpacity, View, Image } from "react-native";
+import {Text, TouchableOpacity, View, Image} from "react-native";
 import Slider from "@react-native-community/slider";
-import { useState } from "react";
+import {useState} from "react";
 import stylesClimate from "./stylesClimate";
 
 const ClimateParamsAuto = () => {
     const [activeBtn, setActiveBtn] = useState(false);
     const handlePress = () => {
         setActiveBtn(!activeBtn);
+    };
+    const handleSliderChange = (value: number) => {
+        console.log("Slider value:", value);
     };
     return (
         <View style={stylesClimate.climateContainer}>
@@ -43,14 +46,16 @@ const ClimateParamsAuto = () => {
             </TouchableOpacity>
             <View style={stylesClimate.climateSlider}>
                 <Slider
-                    style={{ width: 200, height: 40 }}
-                    minimumValue={0}
-                    maximumValue={1}
+                    style={{width: 200, height: 40}}
+                    minimumValue={16}
+                    maximumValue={30}
+                    step={1}
                     minimumTrackTintColor="#11A8FD"
                     maximumTrackTintColor="#212325"
                     thumbTintColor="#212325"
                     lowerLimit={16}
                     upperLimit={30}
+                    onValueChange={handleSliderChange}
                 />
             </View>
         </View>

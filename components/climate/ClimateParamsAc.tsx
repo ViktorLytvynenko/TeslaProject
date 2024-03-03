@@ -13,9 +13,9 @@ const ClimateParamsAc = () => {
     const handlePress = () => {
         setActiveBtn(!activeBtn);
     };
-    // const changeSlider = (value)=>{
-    //     console.log(value);
-    // }
+    const handleSliderChange = (value: number) => {
+        console.log("Slider value:", value);
+    };
     return (
         <View style={stylesClimate.climateContainer}>
             <Text style={stylesClimate.climateText}>Ac</Text>
@@ -52,14 +52,15 @@ const ClimateParamsAc = () => {
             <View style={stylesClimate.climateSlider}>
                 <Slider
                     style={{ width: 200, height: 40 }}
-                    minimumValue={0}
-                    maximumValue={1}
+                    minimumValue={16}
+                    maximumValue={30}
+                    step={1}
                     minimumTrackTintColor="#11A8FD"
                     maximumTrackTintColor="#212325"
                     thumbTintColor="#212325"
                     lowerLimit={16}
                     upperLimit={30}
-                    // onValueChange={changeSlider(params)}
+                    onValueChange={handleSliderChange}
                 />
             </View>
         </View>
