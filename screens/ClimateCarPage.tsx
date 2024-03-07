@@ -7,31 +7,12 @@ import ClimateParamsFan from "../components/climate/ClimateParamsFan";
 import ClimateParamsHeat from "../components/climate/ClimateParamsHeat";
 import ClimateParamsAuto from "../components/climate/ClimateParamsAuto";
 import TitlePages from "../components/TitlePages";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {RootStateType} from "../redux/store";
-import {
-    changeValueParamsAC,
-    changeValueParamsAuto,
-    changeValueParamsFan,
-    changeValueParamsHeat
-} from "../redux/slices/statusClimate";
+
 
 const ClimateCarPage: FC<any> = ({navigation}) => {
     const params = useSelector((state: RootStateType) => state.climate);
-    const dispatch = useDispatch();
-
-    const onPressBtnAC = () => {
-        dispatch(changeValueParamsAC({newValue: params.ac.value}));
-    }
-    const onPressBtnFan = () => {
-        dispatch(changeValueParamsFan({newValue: params.fan.value}));
-    }
-    const onPressBtnHeat = () => {
-        dispatch(changeValueParamsHeat({newValue: params.heat.value}));
-    }
-    const onPressBtnAuto = () => {
-        dispatch(changeValueParamsAuto({newValue: params.auto.value}));
-    }
 
     const onPressGoBack = () => {
         navigation.goBack();
@@ -57,10 +38,10 @@ const ClimateCarPage: FC<any> = ({navigation}) => {
                     {params.auto.status === "on" && <Text style={s.climateRangeText}>{params.auto.value}</Text>}
                 </View>
                 <View style={s.climateParams}>
-                    <ClimateParamsAc onPressBtnAC={onPressBtnAC}/>
-                    <ClimateParamsFan onPressBtnFan={onPressBtnFan}/>
-                    <ClimateParamsHeat onPressBtnHeat={onPressBtnHeat}/>
-                    <ClimateParamsAuto onPressBtnAuto={onPressBtnAuto}/>
+                    <ClimateParamsAc/>
+                    <ClimateParamsFan/>
+                    <ClimateParamsHeat/>
+                    <ClimateParamsAuto/>
                 </View>
             </View>
         </LinearGradient>

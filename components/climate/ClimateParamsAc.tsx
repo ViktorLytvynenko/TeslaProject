@@ -1,18 +1,23 @@
-import { Text, TouchableOpacity, View, Image } from "react-native";
+import {Text, TouchableOpacity, View, Image} from "react-native";
 
 import Slider from "@react-native-community/slider";
-import { useState } from "react";
+import {useState} from "react";
 import stylesClimate from "./stylesClimate";
-import { useDispatch, useSelector } from "react-redux";
-import { RootStateType } from "../../redux/store";
+import {useDispatch, useSelector} from "react-redux";
+import {RootStateType} from "../../redux/store";
+import {changeParamItem, toggleParamItem} from "../../redux/slices/statusClimate";
 
-const ClimateParamsAc = ({onPressBtnAC}) => {
-    // const [activeBtn, setActiveBtn] = useState(false);
+const ClimateParamsAc = () => {
+    const dispatch = useDispatch()
     const params = useSelector((state: RootStateType) => state.climate.ac);
-
-    const handleSliderChange = (value: number) => {
-        console.log("Slider value:", value);
-    };
+    const onPressBtnAC = () => {
+        dispatch(toggleParamItem("ac"))
+    }
+    const handleSliderChange = (newValue: number) => {
+        if (params.status === "on") {
+            dispatch(changeParamItem({param: "ac", newValue}))
+        }
+    }
     return (
         <View style={stylesClimate.climateContainer}>
             <Text style={stylesClimate.climateText}>Ac</Text>
@@ -48,7 +53,7 @@ const ClimateParamsAc = ({onPressBtnAC}) => {
             </TouchableOpacity>
             <View style={stylesClimate.climateSlider}>
                 <Slider
-                    style={{ width: 200, height: 40 }}
+                    style={{width: 200, height: 40}}
                     minimumValue={16}
                     maximumValue={30}
                     value={params.value}
