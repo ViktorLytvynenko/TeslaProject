@@ -4,13 +4,21 @@ import {useState} from "react";
 import stylesClimate from "./stylesClimate";
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "../../redux/store";
+import {changeParamItem, toggleParamItem} from "../../redux/slices/statusClimate";
 
-const ClimateParamsAuto = ({onPressBtnAuto}) => {
+const ClimateParamsAuto = () => {
+    const dispatch = useDispatch()
     const params = useSelector((state: RootStateType) => state.climate.auto);
 
-    const handleSliderChange = (value: number) => {
-        console.log("Slider value:", value);
-    };
+    const onPressBtnAuto = () => {
+        dispatch(toggleParamItem("auto"))
+    }
+
+    const handleSliderChange = (newValue: number) => {
+        if (params.status === "on") {
+            dispatch(changeParamItem({param: "auto", newValue}))
+        }
+    }
     return (
         <View style={stylesClimate.climateContainer}>
             <Text style={stylesClimate.climateText}>Auto</Text>
