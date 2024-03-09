@@ -12,10 +12,6 @@ export interface IStateClimate {
     auto: IParam;
 }
 
-interface IChangeAction {
-    type: string;
-    newValue: number;
-}
 
 const initialState: IStateClimate = {
     ac: {

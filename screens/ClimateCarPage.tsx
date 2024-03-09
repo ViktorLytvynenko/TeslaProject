@@ -1,19 +1,17 @@
-import {View, Text, StyleSheet, Image} from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import stylesBase from "../styles/styles";
-import {LinearGradient} from "expo-linear-gradient";
-import {FC} from "react";
+import { LinearGradient } from "expo-linear-gradient";
+import { FC } from "react";
 import ClimateParamsAc from "../components/climate/ClimateParamsAc";
 import ClimateParamsFan from "../components/climate/ClimateParamsFan";
 import ClimateParamsHeat from "../components/climate/ClimateParamsHeat";
 import ClimateParamsAuto from "../components/climate/ClimateParamsAuto";
 import TitlePages from "../components/TitlePages";
-import {useSelector} from "react-redux";
-import {RootStateType} from "../redux/store";
+import { useSelector } from "react-redux";
+import { RootStateType } from "../redux/store";
 
-
-const ClimateCarPage: FC<any> = ({navigation}) => {
+const ClimateCarPage: FC<any> = ({ navigation }) => {
     const params = useSelector((state: RootStateType) => state.climate);
-
     const onPressGoBack = () => {
         navigation.goBack();
     };
@@ -21,27 +19,43 @@ const ClimateCarPage: FC<any> = ({navigation}) => {
         <LinearGradient
             colors={["#292C31", "#292C31", "#2D2C31"]}
             locations={[0, 0.7287, 1]}
-            start={{x: 0, y: 0}}
-            end={{x: 1, y: 1}}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
             style={stylesBase.containerGradient}
         >
             <View style={stylesBase.container}>
-                <TitlePages onPressGoBack={onPressGoBack} text="CLIMATE"/>
+                <TitlePages onPressGoBack={onPressGoBack} text="CLIMATE" />
                 <View style={s.climateRangeContainer}>
                     <Image
                         source={require("../assets/icons/climateRange.png")}
                         style={s.climateRangeImg}
                     />
-                    {params.ac.status === "on" && <Text style={s.climateRangeText}>{params.ac.value}</Text>}
-                    {params.fan.status === "on" && <Text style={s.climateRangeText}>{params.fan.value}</Text>}
-                    {params.heat.status === "on" && <Text style={s.climateRangeText}>{params.heat.value}</Text>}
-                    {params.auto.status === "on" && <Text style={s.climateRangeText}>{params.auto.value}</Text>}
+                    {params.ac.status === "on" && (
+                        <Text style={s.climateRangeText}>
+                            {params.ac.value}
+                        </Text>
+                    )}
+                    {params.fan.status === "on" && (
+                        <Text style={s.climateRangeText}>
+                            {params.fan.value}
+                        </Text>
+                    )}
+                    {params.heat.status === "on" && (
+                        <Text style={s.climateRangeText}>
+                            {params.heat.value}
+                        </Text>
+                    )}
+                    {params.auto.status === "on" && (
+                        <Text style={s.climateRangeText}>
+                            {params.auto.value}
+                        </Text>
+                    )}
                 </View>
                 <View style={s.climateParams}>
-                    <ClimateParamsAc/>
-                    <ClimateParamsFan/>
-                    <ClimateParamsHeat/>
-                    <ClimateParamsAuto/>
+                    <ClimateParamsAc />
+                    <ClimateParamsFan />
+                    <ClimateParamsHeat />
+                    <ClimateParamsAuto />
                 </View>
             </View>
         </LinearGradient>

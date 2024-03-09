@@ -3,8 +3,13 @@ import stylesBase from "../styles/styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { FC } from "react";
 import TitlePages from "../components/TitlePages";
+import { useDispatch, useSelector } from "react-redux";
+import { RootStateType } from "../redux/store";
 
 const ChargeCarPage: FC<any> = ({ navigation }) => {
+    const dispatch = useDispatch();
+    const params = useSelector((state: RootStateType) => state.charge);
+
     const onPressGoBack = () => {
         navigation.goBack();
     };
@@ -23,7 +28,7 @@ const ChargeCarPage: FC<any> = ({ navigation }) => {
                     style={s.carImage}
                 />
                 <View style={s.chargeText}>
-                    <Text style={s.chargeTextCounter}>65</Text>
+                    <Text style={s.chargeTextCounter}>{params.percent}</Text>
                     <Text style={s.chargeTextPercent}>%</Text>
                 </View>
                 <View style={s.carChargeContainer}>
@@ -32,7 +37,10 @@ const ChargeCarPage: FC<any> = ({ navigation }) => {
                         source={require("../assets/icons/batteryBase.png")}
                     />
                     <Image
-                        style={s.batteryCharge}
+                        style={[
+                            s.batteryCharge,
+                            { width: `${params.percent}%` },
+                        ]}
                         source={require("../assets/icons/batteryCharge.png")}
                     />
                 </View>
@@ -91,7 +99,6 @@ const s = StyleSheet.create({
         height: "100%",
     },
     batteryCharge: {
-        width: "65%",
         height: "100%",
         position: "absolute",
         top: 0,
