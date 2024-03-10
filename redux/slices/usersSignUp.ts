@@ -4,14 +4,16 @@ export interface IStateUsers {
     email: string,
     phone: string,
     firstName: string,
-    lastName: string
+    lastName: string,
+    password: string
 }
 
 const initialState: IStateUsers = {
     email: '',
     phone: '',
     firstName: '',
-    lastName: '' 
+    lastName: '',
+    password: ''
 };
 
 const usersSlice = createSlice({
@@ -19,8 +21,8 @@ const usersSlice = createSlice({
     initialState,
     reducers: {
         changeForm: (state, action: PayloadAction<any>) => {
-          const {type, value} = action.payload
-          state[type] = value
+            const {type, value} = action.payload
+            state[type] = value
         }
     }
 });

@@ -2,9 +2,10 @@ import {configureStore} from '@reduxjs/toolkit'
 import statusCar, {IStateCar} from './slices/statusCar'
 import statusClimate, {IStateClimate} from './slices/statusClimate';
 import statusDoors, {IStateDoors} from "./slices/statusDoors";
-import statusCharge, { IStateCharge } from './slices/statusCharge';
-import users, { IStateUsers } from './slices/usersSignUp';
+import statusCharge, {IStateCharge} from './slices/statusCharge';
+import {IStateUsers} from './slices/usersSignUp';
 import usersSignUp from './slices/usersSignUp';
+import usersSignIn, {IStateDriver} from "./slices/usersSignIn";
 
 export type RootStateType = {
     car: IStateCar
@@ -12,6 +13,7 @@ export type RootStateType = {
     doors: IStateDoors
     charge: IStateCharge
     users: IStateUsers
+    driver: IStateDriver
 };
 const store = configureStore({
     reducer: {
@@ -19,7 +21,8 @@ const store = configureStore({
         climate: statusClimate,
         doors: statusDoors,
         charge: statusCharge,
-        signUp: usersSignUp
+        signUp: usersSignUp,
+        signIn: usersSignIn
     }
 })
 
