@@ -1,7 +1,7 @@
-import { FC } from "react";
+import {FC} from "react";
 import stylesBase from "../styles/styles";
 import TitlePages from "../components/TitlePages";
-import { LinearGradient } from "expo-linear-gradient";
+import {LinearGradient} from "expo-linear-gradient";
 import {
     View,
     TextInput,
@@ -9,12 +9,13 @@ import {
     Text,
     TouchableOpacity,
 } from "react-native";
-import { Formik } from "formik";
+import {Formik} from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import { changeForm } from "../redux/slices/usersSignUp";
+import {useDispatch} from "react-redux";
+import {changeForm} from "../redux/slices/usersSignUp";
+import {sendCandidateToSignUp} from "../api/signUp";
 
-const SignUpPage: FC<any> = ({ navigation }) => {
+const SignUpPage: FC<any> = ({navigation}) => {
     const dispatch = useDispatch();
     const onPressGoBack = () => {
         navigation.goBack();
@@ -31,36 +32,45 @@ const SignUpPage: FC<any> = ({ navigation }) => {
         <LinearGradient
             colors={["#292C31", "#292C31", "#2D2C31"]}
             locations={[0, 0.7287, 1]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 1}}
             style={stylesBase.containerGradient}
         >
             <View style={stylesBase.container}>
-                <TitlePages onPressGoBack={onPressGoBack} text="CABINET" />
+                <TitlePages onPressGoBack={onPressGoBack} text="CABINET"/>
                 <Formik
                     initialValues={{
                         email: "",
                         phone: "",
                         firstName: "",
                         lastName: "",
+                        password: ""
                     }}
-                    onSubmit={(values) => {
-                        dispatch(changeForm(values));
-                        console.log(values);
+                    onSubmit={async (values) => {
+                        try {
+                            const response = await sendCandidateToSignUp(values);
+                            navigation.navigate("CabinetPage");
+                        } catch (error) {
+                            console.error('Error while submitting form:', error);
+                        }
                     }}
                     validationSchema={SignUpSchema}
                 >
                     {({
-                        handleChange,
-                        handleBlur,
-                        handleSubmit,
-                        values,
-                        errors,
-                        touched,
-                    }) => (
+                          handleChange,
+                          handleBlur,
+                          handleSubmit,
+                          values,
+                          errors,
+                          touched,
+                      }) => (
                         <View style={s.inputContainer}>
                             <TextInput
-                                onChangeText={handleChange("email")}
+                                onChangeText={(newText) => {
+                                    handleChange("email")(newText)
+                                    dispatch(changeForm({type: "email", value: newText}));
+                                }
+                                }
                                 onBlur={handleBlur("email")}
                                 value={values.email}
                                 placeholder="Email"
@@ -68,12 +78,16 @@ const SignUpPage: FC<any> = ({ navigation }) => {
                                 style={s.input}
                             />
                             {errors.email && touched.email && (
-                                <Text style={{ color: "red" }}>
+                                <Text style={{color: "red"}}>
                                     {errors.email}
                                 </Text>
                             )}
                             <TextInput
-                                onChangeText={handleChange("phone")}
+                                onChangeText={(newText) => {
+                                    handleChange("phone")(newText)
+                                    dispatch(changeForm({type: "phone", value: newText}));
+                                }
+                                }
                                 onBlur={handleBlur("phone")}
                                 value={values.phone}
                                 placeholder="Phone"
@@ -81,12 +95,16 @@ const SignUpPage: FC<any> = ({ navigation }) => {
                                 style={s.input}
                             />
                             {errors.phone && touched.phone && (
-                                <Text style={{ color: "red" }}>
+                                <Text style={{color: "red"}}>
                                     {errors.phone}
                                 </Text>
                             )}
                             <TextInput
-                                onChangeText={handleChange("firstName")}
+                                onChangeText={(newText) => {
+                                    handleChange("firstName")(newText)
+                                    dispatch(changeForm({type: "firstName", value: newText}));
+                                }
+                                }
                                 onBlur={handleBlur("firstName")}
                                 value={values.firstName}
                                 placeholder="First name"
@@ -94,12 +112,16 @@ const SignUpPage: FC<any> = ({ navigation }) => {
                                 style={s.input}
                             />
                             {errors.firstName && touched.firstName && (
-                                <Text style={{ color: "red" }}>
+                                <Text style={{color: "red"}}>
                                     {errors.firstName}
                                 </Text>
                             )}
                             <TextInput
-                                onChangeText={handleChange("lastName")}
+                                onChangeText={(newText) => {
+                                    handleChange("lastName")(newText)
+                                    dispatch(changeForm({type: "lastName", value: newText}));
+                                }
+                                }
                                 onBlur={handleBlur("lastName")}
                                 value={values.lastName}
                                 placeholder="Last name"
@@ -107,8 +129,25 @@ const SignUpPage: FC<any> = ({ navigation }) => {
                                 style={s.input}
                             />
                             {errors.lastName && touched.lastName && (
-                                <Text style={{ color: "red" }}>
+                                <Text style={{color: "red"}}>
                                     {errors.lastName}
+                                </Text>
+                            )}
+                            <TextInput
+                                onChangeText={(newText) => {
+                                    handleChange("password")(newText)
+                                    dispatch(changeForm({type: "password", value: newText}));
+                                }
+                                }
+                                onBlur={handleBlur("password")}
+                                value={values.password}
+                                placeholder="Password"
+                                placeholderTextColor="#acafb5"
+                                style={s.input}
+                            />
+                            {errors.password && touched.password && (
+                                <Text style={{color: "red"}}>
+                                    {errors.password}
                                 </Text>
                             )}
                             <TouchableOpacity
