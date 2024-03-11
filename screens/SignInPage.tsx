@@ -7,8 +7,6 @@ import {Formik} from "formik";
 import * as Yup from "yup";
 import {useDispatch} from "react-redux";
 import {driverForm} from "../redux/slices/usersSignIn";
-import {changeForm} from "../redux/slices/usersSignUp";
-import {sendCandidateToSignUp} from "../api/signUp";
 import {getCandidate} from "../api/signIn";
 
 const SignInPage: FC<any> = ({navigation}) => {
@@ -17,7 +15,7 @@ const SignInPage: FC<any> = ({navigation}) => {
         navigation.goBack();
     }
     const SignInSchema = Yup.object().shape({
-        email: Yup.string().email('Invalid email').required('Email is required'),
+        loginOrEmail: Yup.string().required('Login or Email is required'),
         password: Yup.string().required('Password is required'),
     });
     return (
@@ -32,7 +30,7 @@ const SignInPage: FC<any> = ({navigation}) => {
                 <TitlePages onPressGoBack={onPressGoBack} text="CABINET"/>
                 <Formik
                     initialValues={{
-                        email: '',
+                        loginOrEmail: '',
                         password: ''
                     }}
                     onSubmit={async (values) => {
@@ -49,17 +47,17 @@ const SignInPage: FC<any> = ({navigation}) => {
                         <View style={s.inputContainer}>
                             <TextInput
                                 onChangeText={(newText) => {
-                                    handleChange("email")(newText)
-                                    dispatch(driverForm({type: "email", value: newText}));
+                                    handleChange("loginOrEmail")(newText)
+                                    dispatch(driverForm({type: "loginOrEmail", value: newText}));
                                 }
                                 }
-                                onBlur={handleBlur('email')}
-                                value={values.email}
-                                placeholder="Email"
+                                onBlur={handleBlur('loginOrEmail')}
+                                value={values.loginOrEmail}
+                                placeholder="Login or Email"
                                 placeholderTextColor="#acafb5"
                                 style={s.input}
                             />
-                            {errors.email && touched.email && <Text style={{color: 'red'}}>{errors.email}</Text>}
+                            {errors.loginOrEmail && touched.loginOrEmail && <Text style={{color: 'red'}}>{errors.loginOrEmail}</Text>}
                             <TextInput
                                 onChangeText={(newText) => {
                                     handleChange("password")(newText)

@@ -24,9 +24,19 @@ const SignUpPage: FC<any> = ({navigation}) => {
         email: Yup.string()
             .email("Invalid email")
             .required("Email is required"),
-        phone: Yup.string().required("Phone is required"),
-        firstName: Yup.string().required("First name is required"),
-        lastName: Yup.string().required("Last name is required"),
+        telephone: Yup.string().required("Phone is required"),
+        firstName: Yup.string().required("First name is required")
+            .min(2, 'Too short!')
+            .max(35, 'Too long!'),
+        lastName: Yup.string().required("Last name is required")
+            .min(2, 'Too short!')
+            .max(35, 'Too long!'),
+        login: Yup.string().required("Login is required")
+            .min(4, 'Too short!')
+            .max(30, 'Too long!'),
+        password: Yup.string().required("Password is required")
+            .min(7, 'Too short!')
+            .max(30, 'Too long!'),
     });
     return (
         <LinearGradient

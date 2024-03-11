@@ -1,12 +1,12 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export interface IStateDriver {
-    email: string,
+    loginOrEmail: string,
     password: string,
 }
 
 const initialState: IStateDriver = {
-    email: '',
+    loginOrEmail: '',
     password: ''
 };
 
