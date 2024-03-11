@@ -41,10 +41,12 @@ const SignUpPage: FC<any> = ({navigation}) => {
                 <Formik
                     initialValues={{
                         email: "",
-                        phone: "",
+                        telephone: "",
                         firstName: "",
                         lastName: "",
-                        password: ""
+                        login: "",
+                        password: "",
+                        isAdmin: true
                     }}
                     onSubmit={async (values) => {
                         try {
@@ -84,19 +86,19 @@ const SignUpPage: FC<any> = ({navigation}) => {
                             )}
                             <TextInput
                                 onChangeText={(newText) => {
-                                    handleChange("phone")(newText)
-                                    dispatch(changeForm({type: "phone", value: newText}));
+                                    handleChange("telephone")(newText)
+                                    dispatch(changeForm({type: "telephone", value: newText}));
                                 }
                                 }
-                                onBlur={handleBlur("phone")}
-                                value={values.phone}
+                                onBlur={handleBlur("telephone")}
+                                value={values.telephone}
                                 placeholder="Phone"
                                 placeholderTextColor="#acafb5"
                                 style={s.input}
                             />
-                            {errors.phone && touched.phone && (
+                            {errors.telephone && touched.telephone && (
                                 <Text style={{color: "red"}}>
-                                    {errors.phone}
+                                    {errors.telephone}
                                 </Text>
                             )}
                             <TextInput
@@ -131,6 +133,23 @@ const SignUpPage: FC<any> = ({navigation}) => {
                             {errors.lastName && touched.lastName && (
                                 <Text style={{color: "red"}}>
                                     {errors.lastName}
+                                </Text>
+                            )}
+                            <TextInput
+                                onChangeText={(newText) => {
+                                    handleChange("login")(newText)
+                                    dispatch(changeForm({type: "login", value: newText}));
+                                }
+                                }
+                                onBlur={handleBlur("login")}
+                                value={values.login}
+                                placeholder="Login"
+                                placeholderTextColor="#acafb5"
+                                style={s.input}
+                            />
+                            {errors.login && touched.login && (
+                                <Text style={{color: "red"}}>
+                                    {errors.login}
                                 </Text>
                             )}
                             <TextInput

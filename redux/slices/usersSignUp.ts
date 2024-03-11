@@ -2,17 +2,19 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export interface IStateUsers {
     email: string,
-    phone: string,
+    telephone: string,
     firstName: string,
     lastName: string,
+    login: string,
     password: string
 }
 
 const initialState: IStateUsers = {
     email: '',
-    phone: '',
+    telephone: '',
     firstName: '',
     lastName: '',
+    login: '',
     password: ''
 };
 
