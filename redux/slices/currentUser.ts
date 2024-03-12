@@ -28,13 +28,23 @@ const currentUserSlice = createSlice({
     initialState,
     reducers: {
         getUser: (state, action: PayloadAction<any>) => {
+            // state.email = action.payload.email;
+            // state.telephone = action.payload.telephone;
+            // state.firstName = action.payload.firstName;
+            // state.lastName = action.payload.lastName;
+            // state.login = action.payload.login;
+            // state.password = action.payload.password;
+        }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getCurrentUser.fulfilled, (state: IStateCurrentUser, action: PayloadAction<any>) => {
             state.email = action.payload.email;
             state.telephone = action.payload.telephone;
             state.firstName = action.payload.firstName;
             state.lastName = action.payload.lastName;
             state.login = action.payload.login;
-            state.password = action.payload.password; 
-        }
+            state.password = action.payload.password;
+        })
     }
 });
 
