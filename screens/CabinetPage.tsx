@@ -1,34 +1,14 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import stylesBase from "../styles/styles";
 import TitlePages from "../components/TitlePages";
 import { LinearGradient } from "expo-linear-gradient";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserInfo } from "../api/getUserInfo";
-import { getUser } from "../redux/slices/currentUser";
 
 const CabinetPage: FC<any> = ({ navigation }) => {
     const dispatch = useDispatch();
     const token = useSelector((state) => state.signIn.token);
     const userInfo = useSelector((state) => state.user);
-
-    useEffect(() => {
-        const userInfo = getUserInfo(token);
-        userInfo.then(
-            ({ email, telephone, firstName, lastName, login, password }) => {
-                dispatch(
-                    getUser({
-                        email,
-                        telephone,
-                        firstName,
-                        lastName,
-                        login,
-                        password,
-                    })
-                );
-            }
-        );
-    }, [token]);
 
     const onPressGoBack = () => {
         navigation.goBack();
@@ -71,12 +51,18 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                 ) : (
-                    <View>
-                        <Text>First name: {userInfo.firstName}</Text>
-                        <Text>Last name: {userInfo.lastName}</Text>
-                        <Text>Phone: {userInfo.telephone}</Text>
-                        <Text>Email: {userInfo.email}</Text>
-                        <Text>Login: {userInfo.login}</Text>
+                    <View style={s.userWrapper}>
+                        <Text style={s.userText}>
+                            First name: {userInfo.firstName}
+                        </Text>
+                        <Text style={s.userText}>
+                            Last name: {userInfo.lastName}
+                        </Text>
+                        <Text style={s.userText}>Login: {userInfo.login}</Text>
+                        <Text style={s.userText}>
+                            Phone: {userInfo.telephone}
+                        </Text>
+                        <Text style={s.userText}>Email: {userInfo.email}</Text>
                     </View>
                 )}
             </View>
@@ -106,6 +92,15 @@ const s = StyleSheet.create({
     },
     btnText: {
         color: "#fff",
+    },
+    userWrapper: {
+        display: "flex",
+        justifyContent: "center",
+        gap: 15,
+    },
+    userText: {
+        color: "rgba(235, 235, 245, 0.8)",
+        fontSize: 18,
     },
 });
 

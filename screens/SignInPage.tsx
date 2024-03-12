@@ -14,6 +14,8 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { driverForm, getToken } from "../redux/slices/usersSignIn";
 import { getCandidate } from "../api/signIn";
+import { getUserInfo } from "../api/getUserInfo";
+import { getUser } from "../redux/slices/currentUser";
 
 const SignInPage: FC<any> = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -43,6 +45,28 @@ const SignInPage: FC<any> = ({ navigation }) => {
                         try {
                             const response = await getCandidate(values);
                             dispatch(getToken(response.token));
+                            const userInfo = getUserInfo(response.token);
+                            userInfo.then(
+                                ({
+                                    email,
+                                    telephone,
+                                    firstName,
+                                    lastName,
+                                    login,
+                                    password,
+                                }) => {
+                                    dispatch(
+                                        getUser({
+                                            email,
+                                            telephone,
+                                            firstName,
+                                            lastName,
+                                            login,
+                                            password,
+                                        })
+                                    );
+                                }
+                            );
                             navigation.navigate("CabinetPage");
                         } catch (error) {
                             console.error(
