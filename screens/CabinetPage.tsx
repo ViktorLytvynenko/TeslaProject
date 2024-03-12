@@ -4,8 +4,11 @@ import TitlePages from "../components/TitlePages";
 import { LinearGradient } from "expo-linear-gradient";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import { resetToken } from "../redux/slices/usersSignIn";
+import { resetData } from "../redux/slices/currentUser";
 
 const CabinetPage: FC<any> = ({ navigation }) => {
+    const dispatch = useDispatch();
     const token = useSelector((state) => state.signIn.token);
     const userInfo = useSelector((state) => state.user);
 
@@ -62,6 +65,15 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                             Phone: {userInfo.telephone}
                         </Text>
                         <Text style={s.userText}>Email: {userInfo.email}</Text>
+                        <TouchableOpacity
+                            style={s.btnContainer}
+                            onPress={() => {
+                                dispatch(resetToken());
+                                dispatch(resetData());
+                            }}
+                        >
+                            <Text style={s.btnText}>Log out</Text>
+                        </TouchableOpacity>
                     </View>
                 )}
             </View>
