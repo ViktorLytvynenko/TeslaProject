@@ -66,12 +66,13 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                         </Text>
                         <Text style={s.userText}>Email: {userInfo.email}</Text>
                         <TouchableOpacity
+                            style={s.btnContainer}
                             onPress={() => {
                                 dispatch(resetToken());
                                 dispatch(resetData());
                             }}
                         >
-                            <Text>Log out</Text>
+                            <Text style={s.btnText}>Log out</Text>
                         </TouchableOpacity>
                     </View>
                 )}

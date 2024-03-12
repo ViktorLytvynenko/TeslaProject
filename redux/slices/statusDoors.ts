@@ -23,11 +23,15 @@ const doorsSlice = createSlice({
             state.statusTrunk = !state.statusTrunk;
         },
         toggleStatusRoofOpen: (state) => {
-            state.statusOpenRood = !state.statusRoof;
-        }
+            state.statusRoof = !state.statusRoof;
+        },
     },
 });
 
-export const { toggleStatusHoodOpen, toggleStatusTrunkOpen, toggleStatusRoofOpen } = doorsSlice.actions;
+export const {
+    toggleStatusHoodOpen,
+    toggleStatusTrunkOpen,
+    toggleStatusRoofOpen,
+} = doorsSlice.actions;
 
 export default doorsSlice.reducer;
