@@ -8,6 +8,7 @@ export interface IStateCurrentUser {
     lastName: string,
     login: string,
     password: string
+    isLoading: boolean
 }
 
 const initialState: IStateCurrentUser = {
@@ -16,7 +17,8 @@ const initialState: IStateCurrentUser = {
     firstName: '',
     lastName: '',
     login: '',
-    password: ''
+    password: '',
+    isLoading: false
 };
 
 export const getCurrentUser = createAsyncThunk("users/getCurrentUser", async () => {
@@ -27,17 +29,13 @@ const currentUserSlice = createSlice({
     name: "currentUser",
     initialState,
     reducers: {
-        getUser: (state, action: PayloadAction<any>) => {
-            // state.email = action.payload.email;
-            // state.telephone = action.payload.telephone;
-            // state.firstName = action.payload.firstName;
-            // state.lastName = action.payload.lastName;
-            // state.login = action.payload.login;
-            // state.password = action.payload.password;
-        }
     },
     extraReducers: (builder) => {
+        builder.addCase(getCurrentUser.pending, (state: IStateCurrentUser) => {
+            state.isLoading = true
+        })
         builder.addCase(getCurrentUser.fulfilled, (state: IStateCurrentUser, action: PayloadAction<any>) => {
+            state.isLoading = false;
             state.email = action.payload.email;
             state.telephone = action.payload.telephone;
             state.firstName = action.payload.firstName;

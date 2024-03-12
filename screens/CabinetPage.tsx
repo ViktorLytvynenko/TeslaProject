@@ -6,7 +6,6 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
 const CabinetPage: FC<any> = ({ navigation }) => {
-    const dispatch = useDispatch();
     const token = useSelector((state) => state.signIn.token);
     const userInfo = useSelector((state) => state.user);
 
