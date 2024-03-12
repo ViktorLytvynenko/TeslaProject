@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import {Formik} from "formik";
 import * as Yup from "yup";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {driverForm, getToken} from "../redux/slices/usersSignIn";
 import {getCandidate} from "../api/signIn";
 import {getUserInfo} from "../api/getUserInfo";
@@ -48,27 +48,7 @@ const SignInPage: FC<any> = ({navigation}) => {
                             const response = await getCandidate(values);
                             setToken(response.token)
                             dispatch<any>(getCurrentUser())
-                            userInfo.then(
-                                ({
-                                     email,
-                                     telephone,
-                                     firstName,
-                                     lastName,
-                                     login,
-                                     password,
-                                 }) => {
-                                    dispatch(
-                                        getUser({
-                                            email,
-                                            telephone,
-                                            firstName,
-                                            lastName,
-                                            login,
-                                            password,
-                                        })
-                                    );
-                                }
-                            );
+
                             navigation.navigate("CabinetPage");
                         } catch (error) {
                             console.error(
