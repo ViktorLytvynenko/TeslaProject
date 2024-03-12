@@ -1,15 +1,35 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import stylesBase from "../styles/styles";
 import TitlePages from "../components/TitlePages";
 import { LinearGradient } from "expo-linear-gradient";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { useSelector } from "react-redux";
-import { RootStateType } from "../redux/store";
-import { IStateDriver } from "../redux/slices/usersSignIn";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserInfo } from "../api/getUserInfo";
+import { getUser } from "../redux/slices/currentUser";
 
 const CabinetPage: FC<any> = ({ navigation }) => {
+    const dispatch = useDispatch();
     const token = useSelector((state) => state.signIn.token);
-    const;
+    const userInfo = useSelector((state) => state.user);
+
+    useEffect(() => {
+        const userInfo = getUserInfo(token);
+        userInfo.then(
+            ({ email, telephone, firstName, lastName, login, password }) => {
+                dispatch(
+                    getUser({
+                        email,
+                        telephone,
+                        firstName,
+                        lastName,
+                        login,
+                        password,
+                    })
+                );
+            }
+        );
+    }, [token]);
+
     const onPressGoBack = () => {
         navigation.goBack();
     };
@@ -52,11 +72,11 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                     </View>
                 ) : (
                     <View>
-                        <Text>First name:</Text>
-                        <Text>Last name:</Text>
-                        <Text>Phone:</Text>
-                        <Text>Email:</Text>
-                        <Text>Login:</Text>
+                        <Text>First name: {userInfo.firstName}</Text>
+                        <Text>Last name: {userInfo.lastName}</Text>
+                        <Text>Phone: {userInfo.telephone}</Text>
+                        <Text>Email: {userInfo.email}</Text>
+                        <Text>Login: {userInfo.login}</Text>
                     </View>
                 )}
             </View>
