@@ -6,7 +6,9 @@ import statusCharge, {IStateCharge} from './slices/statusCharge';
 import {IStateUsers} from './slices/usersSignUp';
 import usersSignUp from './slices/usersSignUp';
 import usersSignIn, {IStateDriver} from "./slices/usersSignIn";
-import currentUser, { IStateCurrentUser } from './slices/currentUser';
+import currentUser, {getCurrentUser, getUser, IStateCurrentUser} from './slices/currentUser';
+import {getToken} from "../utils/tokens";
+
 
 export type RootStateType = {
     car: IStateCar
@@ -17,6 +19,7 @@ export type RootStateType = {
     driver: IStateDriver
     user: IStateCurrentUser
 };
+
 const store = configureStore({
     reducer: {
         car: statusCar,
@@ -26,6 +29,12 @@ const store = configureStore({
         signUp: usersSignUp,
         signIn: usersSignIn,
         user: currentUser
+    }
+})
+
+getToken().then(token => {
+    if (token) {
+        store.dispatch<any>(getCurrentUser());
     }
 })
 

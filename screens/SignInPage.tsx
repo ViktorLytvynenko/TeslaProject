@@ -1,7 +1,7 @@
-import { FC } from "react";
+import {FC} from "react";
 import stylesBase from "../styles/styles";
 import TitlePages from "../components/TitlePages";
-import { LinearGradient } from "expo-linear-gradient";
+import {LinearGradient} from "expo-linear-gradient";
 import {
     StyleSheet,
     Text,
@@ -9,15 +9,17 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import { Formik } from "formik";
+import {Formik} from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import { driverForm, getToken } from "../redux/slices/usersSignIn";
-import { getCandidate } from "../api/signIn";
-import { getUserInfo } from "../api/getUserInfo";
-import { getUser } from "../redux/slices/currentUser";
+import {useDispatch} from "react-redux";
+import {driverForm, getToken} from "../redux/slices/usersSignIn";
+import {getCandidate} from "../api/signIn";
+import {getUserInfo} from "../api/getUserInfo";
+import {getCurrentUser, getUser} from "../redux/slices/currentUser";
+import {instance} from "../api/instance";
+import {setToken} from "../utils/tokens";
 
-const SignInPage: FC<any> = ({ navigation }) => {
+const SignInPage: FC<any> = ({navigation}) => {
     const dispatch = useDispatch();
     const onPressGoBack = () => {
         navigation.goBack();
@@ -30,12 +32,12 @@ const SignInPage: FC<any> = ({ navigation }) => {
         <LinearGradient
             colors={["#292C31", "#292C31", "#2D2C31"]}
             locations={[0, 0.7287, 1]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 1}}
             style={stylesBase.containerGradient}
         >
             <View style={stylesBase.container}>
-                <TitlePages onPressGoBack={onPressGoBack} text="CABINET" />
+                <TitlePages onPressGoBack={onPressGoBack} text="CABINET"/>
                 <Formik
                     initialValues={{
                         loginOrEmail: "",
@@ -44,17 +46,17 @@ const SignInPage: FC<any> = ({ navigation }) => {
                     onSubmit={async (values) => {
                         try {
                             const response = await getCandidate(values);
-                            dispatch(getToken(response.token));
-                            const userInfo = getUserInfo(response.token);
+                            setToken(response.token)
+                            dispatch<any>(getCurrentUser())
                             userInfo.then(
                                 ({
-                                    email,
-                                    telephone,
-                                    firstName,
-                                    lastName,
-                                    login,
-                                    password,
-                                }) => {
+                                     email,
+                                     telephone,
+                                     firstName,
+                                     lastName,
+                                     login,
+                                     password,
+                                 }) => {
                                     dispatch(
                                         getUser({
                                             email,
@@ -78,13 +80,13 @@ const SignInPage: FC<any> = ({ navigation }) => {
                     validationSchema={SignInSchema}
                 >
                     {({
-                        handleChange,
-                        handleBlur,
-                        handleSubmit,
-                        values,
-                        errors,
-                        touched,
-                    }) => (
+                          handleChange,
+                          handleBlur,
+                          handleSubmit,
+                          values,
+                          errors,
+                          touched,
+                      }) => (
                         <View style={s.inputContainer}>
                             <TextInput
                                 onChangeText={(newText) => {
@@ -103,7 +105,7 @@ const SignInPage: FC<any> = ({ navigation }) => {
                                 style={s.input}
                             />
                             {errors.loginOrEmail && touched.loginOrEmail && (
-                                <Text style={{ color: "red" }}>
+                                <Text style={{color: "red"}}>
                                     {errors.loginOrEmail}
                                 </Text>
                             )}
@@ -124,7 +126,7 @@ const SignInPage: FC<any> = ({ navigation }) => {
                                 style={s.input}
                             />
                             {errors.password && touched.password && (
-                                <Text style={{ color: "red" }}>
+                                <Text style={{color: "red"}}>
                                     {errors.password}
                                 </Text>
                             )}

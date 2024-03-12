@@ -1,4 +1,5 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {getUserInfo} from "../../api/getUserInfo";
 
 export interface IStateCurrentUser {
     email: string,
@@ -17,6 +18,10 @@ const initialState: IStateCurrentUser = {
     login: '',
     password: ''
 };
+
+export const getCurrentUser = createAsyncThunk("users/getCurrentUser", async () => {
+    return await getUserInfo();
+})
 
 const currentUserSlice = createSlice({
     name: "currentUser",
