@@ -3,11 +3,10 @@ import stylesBase from "../styles/styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { FC } from "react";
 import TitlePages from "../components/TitlePages";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootStateType } from "../redux/store";
 
 const ChargeCarPage: FC<any> = ({ navigation }) => {
-    const dispatch = useDispatch();
     const params = useSelector((state: RootStateType) => state.charge);
 
     const onPressGoBack = () => {

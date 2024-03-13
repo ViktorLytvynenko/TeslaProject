@@ -31,7 +31,7 @@ const UnlockPage: FC<any> = ({ navigation }) => {
             <View style={stylesBase.container}>
                 <View style={stylesBase.wrapper}>
                     <Settings onPress={handleSettings} />
-                    <View style={s.carLight}>
+                    <View>
                         <TouchableOpacity onPress={handleImagePress}>
                             {pressImg ? (
                                 <View>
@@ -67,10 +67,6 @@ const UnlockPage: FC<any> = ({ navigation }) => {
 };
 
 const s = StyleSheet.create({
-    carLight: {
-        // marginTop: 130,
-        // marginBottom: 172,
-    },
     carLightText: {
         color: "#FFF",
         textAlign: "center",

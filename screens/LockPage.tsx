@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import Settings from "../components/Settings";
 import ButtonLock from "../components/ButtonLock";
 import stylesBase from "../styles/styles";
 import { useDispatch } from "react-redux";
@@ -81,10 +80,6 @@ const s = StyleSheet.create({
         letterSpacing: -0.408,
         paddingHorizontal: 20,
     },
-    // unlockBtn: {
-    //     width: 72,
-    //     height: 72,
-    // },
     unlockImg: {
         marginTop: 7,
         width: 72,

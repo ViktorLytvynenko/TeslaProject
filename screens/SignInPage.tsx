@@ -12,14 +12,8 @@ import {
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    driverForm,
-    getToken,
-    getTokenUser,
-} from "../redux/slices/usersSignIn";
-import { getCandidate } from "../api/signIn";
-import { getCurrentUser, getUser } from "../redux/slices/currentUser";
-import { instance } from "../api/instance";
+import { driverForm, getTokenUser } from "../redux/slices/usersSignIn";
+import { getCurrentUser } from "../redux/slices/currentUser";
 import { setToken } from "../utils/tokens";
 
 const SignInPage: FC<any> = ({ navigation }) => {
