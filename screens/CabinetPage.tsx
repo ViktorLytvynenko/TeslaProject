@@ -1,7 +1,7 @@
-import { FC, useState } from "react";
+import {FC, useState} from "react";
 import stylesBase from "../styles/styles";
 import TitlePages from "../components/TitlePages";
-import { LinearGradient } from "expo-linear-gradient";
+import {LinearGradient} from "expo-linear-gradient";
 import {
     Image,
     StyleSheet,
@@ -10,15 +10,14 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import { Formik } from "formik";
+import {Formik} from "formik";
 import * as Yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
-import { resetToken } from "../redux/slices/usersSignIn";
-import { editUser, resetData } from "../redux/slices/currentUser";
-import { Feather } from "@expo/vector-icons";
-import { changeForm } from "../redux/slices/usersSignUp";
+import {useDispatch, useSelector} from "react-redux";
+import {resetToken} from "../redux/slices/usersSignIn";
+import {editUser, resetData, updateCurrentUser} from "../redux/slices/currentUser";
+import EditButton from "../components/ButtonEdit";
 
-const CabinetPage: FC<any> = ({ navigation }) => {
+const CabinetPage: FC<any> = ({navigation}) => {
     const dispatch = useDispatch();
     const token = useSelector((state) => state.signIn.token);
     const userInfo = useSelector((state) => state.user);
@@ -75,12 +74,12 @@ const CabinetPage: FC<any> = ({ navigation }) => {
         <LinearGradient
             colors={["#292C31", "#292C31", "#2D2C31"]}
             locations={[0, 0.7287, 1]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 1}}
             style={stylesBase.containerGradient}
         >
             <View style={stylesBase.container}>
-                <TitlePages onPressGoBack={onPressGoBack} text="CABINET" />
+                <TitlePages onPressGoBack={onPressGoBack} text="CABINET"/>
                 <View style={s.imgContainer}>
                     <Image
                         source={require("../assets/SignUpLogo.png")}
@@ -112,19 +111,19 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                 lastName: userInfo.lastName,
                                 login: userInfo.login,
                             }}
-                            onSubmit={async (values) => {
-                                console.log(values);
+                            onSubmit={async () => {
+                                dispatch(updateCurrentUser(userInfo));
                             }}
                             validationSchema={CabinetSchema}
                         >
                             {({
-                                handleChange,
-                                handleBlur,
-                                handleSubmit,
-                                values,
-                                errors,
-                                touched,
-                            }) => (
+                                  handleChange,
+                                  handleBlur,
+                                  handleSubmit,
+                                  values,
+                                  errors,
+                                  touched,
+                              }) => (
                                 <>
                                     <View style={s.userTextContainer}>
                                         <Text style={[s.userText, s.userTitle]}>
@@ -137,7 +136,8 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                 {userInfo.firstName}
                                             </Text>
                                         ) : (
-                                            <View>
+                                            <View
+                                                style={s.userBody}>
                                                 <TextInput
                                                     onChangeText={(newText) => {
                                                         handleChange(
@@ -157,7 +157,7 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                     placeholder="First name"
                                                     placeholderTextColor="#acafb5"
                                                     style={[
-                                                        s.userText,
+                                                        s.userTextEdit,
                                                         s.userBody,
                                                     ]}
                                                 />
@@ -173,16 +173,7 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                     )}
                                             </View>
                                         )}
-
-                                        <TouchableOpacity
-                                            onPress={editDataFirstName}
-                                        >
-                                            <Feather
-                                                name="edit"
-                                                size={16}
-                                                color="rgba(235, 235, 245, 0.8)"
-                                            />
-                                        </TouchableOpacity>
+                                        <EditButton onPress={editDataFirstName}/>
                                     </View>
                                     <View style={s.userTextContainer}>
                                         <Text style={[s.userText, s.userTitle]}>
@@ -195,7 +186,7 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                 {userInfo.lastName}
                                             </Text>
                                         ) : (
-                                            <View>
+                                            <View style={s.userBody}>
                                                 <TextInput
                                                     onChangeText={(newText) => {
                                                         handleChange(
@@ -215,7 +206,7 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                     placeholder="Last name"
                                                     placeholderTextColor="#acafb5"
                                                     style={[
-                                                        s.userText,
+                                                        s.userTextEdit,
                                                         s.userTitle,
                                                     ]}
                                                 />
@@ -231,16 +222,7 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                     )}
                                             </View>
                                         )}
-
-                                        <TouchableOpacity
-                                            onPress={editDataLastName}
-                                        >
-                                            <Feather
-                                                name="edit"
-                                                size={16}
-                                                color="rgba(235, 235, 245, 0.8)"
-                                            />
-                                        </TouchableOpacity>
+                                        <EditButton onPress={editDataLastName}/>
                                     </View>
                                     <View style={s.userTextContainer}>
                                         <Text style={[s.userText, s.userTitle]}>
@@ -253,7 +235,7 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                 {userInfo.login}
                                             </Text>
                                         ) : (
-                                            <View>
+                                            <View style={s.userBody}>
                                                 <TextInput
                                                     onChangeText={(newText) => {
                                                         handleChange("login")(
@@ -271,7 +253,7 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                     placeholder="Login"
                                                     placeholderTextColor="#acafb5"
                                                     style={[
-                                                        s.userText,
+                                                        s.userTextEdit,
                                                         s.userBody,
                                                     ]}
                                                 />
@@ -287,16 +269,7 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                     )}
                                             </View>
                                         )}
-
-                                        <TouchableOpacity
-                                            onPress={editDataLogin}
-                                        >
-                                            <Feather
-                                                name="edit"
-                                                size={16}
-                                                color="rgba(235, 235, 245, 0.8)"
-                                            />
-                                        </TouchableOpacity>
+                                        <EditButton onPress={editDataLogin}/>
                                     </View>
                                     <View style={s.userTextContainer}>
                                         <Text style={[s.userText, s.userTitle]}>
@@ -309,7 +282,7 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                 {userInfo.telephone}
                                             </Text>
                                         ) : (
-                                            <View>
+                                            <View style={s.userBody}>
                                                 <TextInput
                                                     onChangeText={(newText) => {
                                                         handleChange(
@@ -329,7 +302,7 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                     placeholder="Phone"
                                                     placeholderTextColor="#acafb5"
                                                     style={[
-                                                        s.userText,
+                                                        s.userTextEdit,
                                                         s.userBody,
                                                     ]}
                                                 />
@@ -345,16 +318,7 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                     )}
                                             </View>
                                         )}
-
-                                        <TouchableOpacity
-                                            onPress={editDataPhone}
-                                        >
-                                            <Feather
-                                                name="edit"
-                                                size={16}
-                                                color="rgba(235, 235, 245, 0.8)"
-                                            />
-                                        </TouchableOpacity>
+                                        <EditButton onPress={editDataPhone}/>
                                     </View>
                                     <View style={s.userTextContainer}>
                                         <Text style={[s.userText, s.userTitle]}>
@@ -367,7 +331,7 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                 {userInfo.email}
                                             </Text>
                                         ) : (
-                                            <View>
+                                            <View style={s.userBody}>
                                                 <TextInput
                                                     onChangeText={(newText) => {
                                                         handleChange("email")(
@@ -385,7 +349,7 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                     placeholder="Email"
                                                     placeholderTextColor="#acafb5"
                                                     style={[
-                                                        s.userText,
+                                                        s.userTextEdit,
                                                         s.userBody,
                                                     ]}
                                                 />
@@ -401,16 +365,7 @@ const CabinetPage: FC<any> = ({ navigation }) => {
                                                     )}
                                             </View>
                                         )}
-
-                                        <TouchableOpacity
-                                            onPress={editDataEmail}
-                                        >
-                                            <Feather
-                                                name="edit"
-                                                size={16}
-                                                color="rgba(235, 235, 245, 0.8)"
-                                            />
-                                        </TouchableOpacity>
+                                        <EditButton onPress={editDataEmail}/>
                                     </View>
 
                                     <TouchableOpacity
@@ -476,6 +431,10 @@ const s = StyleSheet.create({
     },
     userText: {
         color: "rgba(235, 235, 245, 0.8)",
+        fontSize: 16,
+    },
+    userTextEdit: {
+        color: "rgba(235, 235, 245, 1)",
         fontSize: 16,
     },
     userTitle: {
