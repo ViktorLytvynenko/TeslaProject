@@ -180,7 +180,11 @@ const SignUpPage: FC<any> = ({navigation}) => {
                                 </Text>
                             )}
                             <TouchableOpacity
-                                onPress={handleSubmit}
+                                onPress={() => {
+                                    handleSubmit()
+                                    //dispatch
+                                }
+                                }
                                 title="Submit"
                                 style={s.btn}
                             >
