@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getUserInfo } from "../../api/getUserInfo";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {getUserInfo} from "../../api/getUserInfo";
+import {updateUserInfo} from "../../api/updateUserInfo";
 
 export interface IStateCurrentUser {
     email: string;
@@ -9,6 +10,7 @@ export interface IStateCurrentUser {
     login: string;
     password: string;
     isLoading: boolean;
+    message: false | string
 }
 
 const initialState: IStateCurrentUser = {
@@ -19,6 +21,7 @@ const initialState: IStateCurrentUser = {
     login: "",
     password: "",
     isLoading: false,
+    message: false
 };
 
 export const getCurrentUser = createAsyncThunk(
@@ -27,6 +30,19 @@ export const getCurrentUser = createAsyncThunk(
         return await getUserInfo();
     }
 );
+
+export const updateCurrentUser = createAsyncThunk(
+    "users/updateCurrentUser",
+    async (userInfo) => {
+        return await updateUserInfo({
+            email: userInfo.email,
+            telephone: userInfo.telephone,
+            firstName: userInfo.firstName,
+            lastName: userInfo.lastName,
+            login: userInfo.login
+        });
+    }
+)
 
 const currentUserSlice = createSlice({
     name: "currentUser",
@@ -42,8 +58,9 @@ const currentUserSlice = createSlice({
             state.isLoading = false;
         },
         editUser: (state, action: PayloadAction<any>) => {
-            const { type, value } = action.payload;
+            const {type, value} = action.payload;
             state[type] = value;
+            state.message = false;
         },
     },
     extraReducers: (builder) => {
@@ -62,8 +79,14 @@ const currentUserSlice = createSlice({
                 state.password = action.payload.password;
             }
         );
+        builder.addCase(
+            updateCurrentUser.fulfilled,
+            (state: IStateCurrentUser, action: PayloadAction<any>) => {
+                state.message = "User was updated"
+            }
+        )
     },
 });
 
-export const { resetData, editUser } = currentUserSlice.actions;
+export const {resetData, editUser} = currentUserSlice.actions;
 export default currentUserSlice.reducer;
