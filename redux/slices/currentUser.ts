@@ -41,6 +41,10 @@ const currentUserSlice = createSlice({
             state.password = "";
             state.isLoading = false;
         },
+        editUser: (state, action: PayloadAction<any>) => {
+            const { type, value } = action.payload;
+            state[type] = value;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getCurrentUser.pending, (state: IStateCurrentUser) => {
@@ -61,5 +65,5 @@ const currentUserSlice = createSlice({
     },
 });
 
-export const { resetData } = currentUserSlice.actions;
+export const { resetData, editUser } = currentUserSlice.actions;
 export default currentUserSlice.reducer;
