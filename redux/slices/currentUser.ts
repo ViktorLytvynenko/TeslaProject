@@ -3,6 +3,7 @@ import {getUserInfo} from "../../api/getUserInfo";
 import {updateUserInfo} from "../../api/updateUserInfo";
 
 export interface IStateCurrentUser {
+    forms: string[];
     email: string;
     telephone: string;
     firstName: string;
@@ -14,6 +15,7 @@ export interface IStateCurrentUser {
 }
 
 const initialState: IStateCurrentUser = {
+    forms: ["email", "telephone", "firstName", "lastName", "login"],
     email: "",
     telephone: "",
     firstName: "",
