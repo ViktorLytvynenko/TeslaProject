@@ -6,7 +6,6 @@ import {
     Image,
     StyleSheet,
     Text,
-    TextInput,
     TouchableOpacity,
     View,
 } from "react-native";
@@ -14,18 +13,14 @@ import {Formik} from "formik";
 import * as Yup from "yup";
 import {useDispatch, useSelector} from "react-redux";
 import {resetToken} from "../redux/slices/usersSignIn";
-import {editUser, resetData, updateCurrentUser} from "../redux/slices/currentUser";
-import EditButton from "../components/ButtonEdit";
+import {resetData, updateCurrentUser} from "../redux/slices/currentUser";
+import FormItem from "../components/FormItem";
 
 const CabinetPage: FC<any> = ({navigation}) => {
     const dispatch = useDispatch();
     const token = useSelector((state) => state.signIn.token);
     const userInfo = useSelector((state) => state.user);
-    const [editFirstName, setEditFirstName] = useState(false);
-    const [editLastName, setEditLastName] = useState(false);
-    const [editLogin, setEditLogin] = useState(false);
-    const [editPhone, setEditPhone] = useState(false);
-    const [editEmail, setEditEmail] = useState(false);
+
     const onPressGoBack = () => {
         navigation.goBack();
     };
@@ -34,21 +29,6 @@ const CabinetPage: FC<any> = ({navigation}) => {
     };
     const onPressSignUp = () => {
         navigation.navigate("SignUpPage");
-    };
-    const editDataFirstName = () => {
-        setEditFirstName(!editFirstName);
-    };
-    const editDataLastName = () => {
-        setEditLastName(!editLastName);
-    };
-    const editDataLogin = () => {
-        setEditLogin(!editLogin);
-    };
-    const editDataPhone = () => {
-        setEditPhone(!editPhone);
-    };
-    const editDataEmail = () => {
-        setEditEmail(!editEmail);
     };
 
     const CabinetSchema = Yup.object().shape({
@@ -120,254 +100,23 @@ const CabinetPage: FC<any> = ({navigation}) => {
                                   handleChange,
                                   handleBlur,
                                   handleSubmit,
-                                  values,
                                   errors,
                                   touched,
                               }) => (
                                 <>
-                                    <View style={s.userTextContainer}>
-                                        <Text style={[s.userText, s.userTitle]}>
-                                            First name:
-                                        </Text>
-                                        {!editFirstName ? (
-                                            <Text
-                                                style={[s.userText, s.userBody]}
-                                            >
-                                                {userInfo.firstName}
-                                            </Text>
-                                        ) : (
-                                            <View
-                                                style={s.userBody}>
-                                                <TextInput
-                                                    onChangeText={(newText) => {
-                                                        handleChange(
-                                                            "firstName"
-                                                        )(newText);
-                                                        dispatch(
-                                                            editUser({
-                                                                type: "firstName",
-                                                                value: newText,
-                                                            })
-                                                        );
-                                                    }}
-                                                    onBlur={handleBlur(
-                                                        "firstName"
-                                                    )}
-                                                    value={values.firstName}
-                                                    placeholder="First name"
-                                                    placeholderTextColor="#acafb5"
-                                                    style={[
-                                                        s.userTextEdit,
-                                                        s.userBody,
-                                                    ]}
-                                                />
-                                                {errors.firstName &&
-                                                    touched.firstName && (
-                                                        <Text
-                                                            style={{
-                                                                color: "red",
-                                                            }}
-                                                        >
-                                                            {errors.firstName}
-                                                        </Text>
-                                                    )}
-                                            </View>
-                                        )}
-                                        <EditButton onPress={editDataFirstName}/>
-                                    </View>
-                                    <View style={s.userTextContainer}>
-                                        <Text style={[s.userText, s.userTitle]}>
-                                            Last name:
-                                        </Text>
-                                        {!editLastName ? (
-                                            <Text
-                                                style={[s.userText, s.userBody]}
-                                            >
-                                                {userInfo.lastName}
-                                            </Text>
-                                        ) : (
-                                            <View style={s.userBody}>
-                                                <TextInput
-                                                    onChangeText={(newText) => {
-                                                        handleChange(
-                                                            "lastName"
-                                                        )(newText);
-                                                        dispatch(
-                                                            editUser({
-                                                                type: "lastName",
-                                                                value: newText,
-                                                            })
-                                                        );
-                                                    }}
-                                                    onBlur={handleBlur(
-                                                        "lastName"
-                                                    )}
-                                                    value={values.lastName}
-                                                    placeholder="Last name"
-                                                    placeholderTextColor="#acafb5"
-                                                    style={[
-                                                        s.userTextEdit,
-                                                        s.userTitle,
-                                                    ]}
-                                                />
-                                                {errors.lastName &&
-                                                    touched.lastName && (
-                                                        <Text
-                                                            style={{
-                                                                color: "red",
-                                                            }}
-                                                        >
-                                                            {errors.lastName}
-                                                        </Text>
-                                                    )}
-                                            </View>
-                                        )}
-                                        <EditButton onPress={editDataLastName}/>
-                                    </View>
-                                    <View style={s.userTextContainer}>
-                                        <Text style={[s.userText, s.userTitle]}>
-                                            Login:
-                                        </Text>
-                                        {!editLogin ? (
-                                            <Text
-                                                style={[s.userText, s.userBody]}
-                                            >
-                                                {userInfo.login}
-                                            </Text>
-                                        ) : (
-                                            <View style={s.userBody}>
-                                                <TextInput
-                                                    onChangeText={(newText) => {
-                                                        handleChange("login")(
-                                                            newText
-                                                        );
-                                                        dispatch(
-                                                            editUser({
-                                                                type: "login",
-                                                                value: newText,
-                                                            })
-                                                        );
-                                                    }}
-                                                    onBlur={handleBlur("login")}
-                                                    value={values.login}
-                                                    placeholder="Login"
-                                                    placeholderTextColor="#acafb5"
-                                                    style={[
-                                                        s.userTextEdit,
-                                                        s.userBody,
-                                                    ]}
-                                                />
-                                                {errors.login &&
-                                                    touched.login && (
-                                                        <Text
-                                                            style={{
-                                                                color: "red",
-                                                            }}
-                                                        >
-                                                            {errors.login}
-                                                        </Text>
-                                                    )}
-                                            </View>
-                                        )}
-                                        <EditButton onPress={editDataLogin}/>
-                                    </View>
-                                    <View style={s.userTextContainer}>
-                                        <Text style={[s.userText, s.userTitle]}>
-                                            Phone:
-                                        </Text>
-                                        {!editPhone ? (
-                                            <Text
-                                                style={[s.userText, s.userBody]}
-                                            >
-                                                {userInfo.telephone}
-                                            </Text>
-                                        ) : (
-                                            <View style={s.userBody}>
-                                                <TextInput
-                                                    onChangeText={(newText) => {
-                                                        handleChange(
-                                                            "telephone"
-                                                        )(newText);
-                                                        dispatch(
-                                                            editUser({
-                                                                type: "telephone",
-                                                                value: newText,
-                                                            })
-                                                        );
-                                                    }}
-                                                    onBlur={handleBlur(
-                                                        "telephone"
-                                                    )}
-                                                    value={values.telephone}
-                                                    placeholder="Phone"
-                                                    placeholderTextColor="#acafb5"
-                                                    style={[
-                                                        s.userTextEdit,
-                                                        s.userBody,
-                                                    ]}
-                                                />
-                                                {errors.telephone &&
-                                                    touched.telephone && (
-                                                        <Text
-                                                            style={{
-                                                                color: "red",
-                                                            }}
-                                                        >
-                                                            {errors.telephone}
-                                                        </Text>
-                                                    )}
-                                            </View>
-                                        )}
-                                        <EditButton onPress={editDataPhone}/>
-                                    </View>
-                                    <View style={s.userTextContainer}>
-                                        <Text style={[s.userText, s.userTitle]}>
-                                            Email:
-                                        </Text>
-                                        {!editEmail ? (
-                                            <Text
-                                                style={[s.userText, s.userBody]}
-                                            >
-                                                {userInfo.email}
-                                            </Text>
-                                        ) : (
-                                            <View style={s.userBody}>
-                                                <TextInput
-                                                    onChangeText={(newText) => {
-                                                        handleChange("email")(
-                                                            newText
-                                                        );
-                                                        dispatch(
-                                                            editUser({
-                                                                type: "email",
-                                                                value: newText,
-                                                            })
-                                                        );
-                                                    }}
-                                                    onBlur={handleBlur("email")}
-                                                    value={values.email}
-                                                    placeholder="Email"
-                                                    placeholderTextColor="#acafb5"
-                                                    style={[
-                                                        s.userTextEdit,
-                                                        s.userBody,
-                                                    ]}
-                                                />
-                                                {errors.email &&
-                                                    touched.email && (
-                                                        <Text
-                                                            style={{
-                                                                color: "red",
-                                                            }}
-                                                        >
-                                                            {errors.email}
-                                                        </Text>
-                                                    )}
-                                            </View>
-                                        )}
-                                        <EditButton onPress={editDataEmail}/>
-                                    </View>
+                                    {userInfo.forms.map(item => (
+                                        <FormItem
+                                            key={item}
+                                            handleChange={handleChange}
+                                            name={item}
+                                            placeholderName={item}
+                                            error={errors[item]}
+                                            handleBlur={handleBlur}
+                                            touched={touched[item]}
+                                        />
+                                    ))
 
+                                    }
                                     <TouchableOpacity
                                         style={s.btnContainer}
                                         onPress={handleSubmit}
@@ -422,27 +171,7 @@ const s = StyleSheet.create({
         display: "flex",
         justifyContent: "center",
         gap: 15,
-    },
-    userTextContainer: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-    },
-    userText: {
-        color: "rgba(235, 235, 245, 0.8)",
-        fontSize: 16,
-    },
-    userTextEdit: {
-        color: "rgba(235, 235, 245, 1)",
-        fontSize: 16,
-    },
-    userTitle: {
-        width: 90,
-    },
-    userBody: {
-        flex: 1,
-    },
+    }
 });
 
 export default CabinetPage;
