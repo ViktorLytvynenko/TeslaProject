@@ -1,14 +1,16 @@
-import { LinearGradient } from "expo-linear-gradient";
-import { View, Image, StyleSheet } from "react-native";
+import {LinearGradient} from "expo-linear-gradient";
+import {View, Image, StyleSheet} from "react-native";
 import stylesBase from "../styles/styles";
 import TitlePages from "../components/TitlePages";
-import { FC } from "react";
+import {FC} from "react";
 import ButtonLock from "../components/ButtonLock";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleStatusOpenCar } from "../redux/slices/statusCar";
-import { RootStateType } from "../redux/store";
+import {useDispatch, useSelector} from "react-redux";
+import {toggleStatusOpenCar} from "../redux/slices/statusCar";
+import {RootStateType} from "../redux/store";
+import {useTranslation} from "react-i18next";
 
-const OpenCarPage: FC<any> = ({ navigation }) => {
+const OpenCarPage: FC<any> = ({navigation}) => {
+    const {t} = useTranslation();
     const openCar: boolean = useSelector(
         (state: RootStateType) => state.car.statusOpenCar
     );
@@ -20,16 +22,21 @@ const OpenCarPage: FC<any> = ({ navigation }) => {
     const onPressGoBack = () => {
         navigation.goBack();
     };
+    const onPressSettings = () => {
+        navigation.navigate("SettingsPage");
+    };
     return (
         <LinearGradient
             colors={["#292C31", "#292C31", "#2D2C31"]}
             locations={[0, 0.7287, 1]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 1}}
             style={stylesBase.containerGradient}
         >
             <View style={stylesBase.container}>
-                <TitlePages text="Status Car" onPressGoBack={onPressGoBack} />
+                <TitlePages onPressGoBack={onPressGoBack}
+                            text={t('openCarPage.text.title')}
+                            onPressSettings={onPressSettings}/>
 
                 {!openCar ? (
                     <View style={s.openCarContainer}>
@@ -49,7 +56,7 @@ const OpenCarPage: FC<any> = ({ navigation }) => {
                                     <ButtonLock
                                         onPress={onPressOpenCar}
                                         img={require("../assets/buttonLock.png")}
-                                        text="Open car"
+                                        text={t('openCarPage.buttons.lockBtn')}
                                     />
                                 </LinearGradient>
                             </View>
@@ -73,7 +80,7 @@ const OpenCarPage: FC<any> = ({ navigation }) => {
                                     <ButtonLock
                                         onPress={onPressOpenCar}
                                         img={require("../assets/lock.png")}
-                                        text="Close car"
+                                        text={t('openCarPage.buttons.unlockBtn')}
                                     />
                                 </LinearGradient>
                             </View>

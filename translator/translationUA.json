@@ -1,0 +1,26 @@
+{
+  "lockPage": {
+    "buttons": {
+      "lockBtn": "Відкрити"
+    }
+  },
+  "unlockPage": {
+    "buttons": {
+      "lockBtn": "Закрити"
+    }
+  },
+  "optionsCar": {
+    "buttons": {
+      "btnLock": "Статус",
+      "btnClimate": "Клімат",
+      "btnCharge": "Зарядка",
+      "btnControl": "Контроль"
+    }
+  },
+  "openCarPage": {
+    "buttons": {
+      "lockBtn": "Відкрити авто",
+      "unlockBtn": "Закрити авто"
+    }
+  }
+}

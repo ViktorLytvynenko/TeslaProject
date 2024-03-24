@@ -1,0 +1,26 @@
+{
+  "lockPage": {
+    "buttons": {
+      "lockBtn": "Öffnen"
+    }
+  },
+  "unlockPage": {
+    "buttons": {
+      "lockBtn": "Sperren"
+    }
+  },
+  "optionsCar": {
+    "buttons": {
+      "btnLock": "Sperren",
+      "btnClimate": "Klima",
+      "btnCharge": "Aufladung",
+      "btnControl": "Kontrolle"
+    }
+  },
+  "openCarPage": {
+    "buttons": {
+      "lockBtn": "Auto öffnen",
+      "unlockBtn": "Auto schließen"
+    }
+  }
+}

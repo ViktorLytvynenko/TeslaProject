@@ -1,18 +1,19 @@
 import { FC } from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import ButtonLock from "../components/ButtonLock";
 import stylesBase from "../styles/styles";
 import { useDispatch } from "react-redux";
 import { toggleStatusApp } from "../redux/slices/statusCar";
+import {useTranslation} from "react-i18next";
 
 const LockPage: FC<any> = ({ navigation }) => {
     const dispatch = useDispatch();
+    const { t } = useTranslation();
     const onPress = () => {
         navigation.navigate("UnlockPage");
         dispatch(toggleStatusApp());
     };
-
     return (
         <LinearGradient
             colors={["#292C31", "#000", "#000", "#292929"]}
@@ -24,6 +25,7 @@ const LockPage: FC<any> = ({ navigation }) => {
             <View style={stylesBase.container}>
                 <View style={stylesBase.wrapper}>
                     <View style={s.carDark}>
+                        {/*<Text style={{color: "white"}}>{t('lockPage.buttons.lockBtn')}</Text>*/}
                         <Image
                             source={require("../assets/carDark.png")}
                             style={s.carDarkImg}
@@ -35,7 +37,7 @@ const LockPage: FC<any> = ({ navigation }) => {
                         style={s.unlockGradient}
                     >
                         <ButtonLock
-                            text="Unlock"
+                            text={t('lockPage.buttons.lockBtn')}
                             onPress={onPress}
                             img={require("../assets/buttonLock.png")}
                         />
@@ -62,7 +64,7 @@ const s = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 40,
-        marginTop: 217,
+        marginTop: 230,
     },
     unlockContainer: {
         display: "flex",
