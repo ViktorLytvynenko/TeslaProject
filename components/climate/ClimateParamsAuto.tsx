@@ -7,8 +7,10 @@ import {
     changeParamItem,
     toggleParamItem,
 } from "../../redux/slices/statusClimate";
+import {useTranslation} from "react-i18next";
 
 const ClimateParamsAuto = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const params = useSelector((state: RootStateType) => state.climate.auto);
 
@@ -23,7 +25,7 @@ const ClimateParamsAuto = () => {
     };
     return (
         <View style={stylesClimate.climateContainer}>
-            <Text style={stylesClimate.climateText}>Auto</Text>
+            <Text style={stylesClimate.climateText}>{t('climateCarPage.text.auto')}</Text>
             <TouchableOpacity
                 style={stylesClimate.climateSVG}
                 onPress={onPressBtnAuto}

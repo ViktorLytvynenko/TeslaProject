@@ -15,8 +15,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {resetToken} from "../redux/slices/usersSignIn";
 import {resetData, updateCurrentUser} from "../redux/slices/currentUser";
 import FormItem from "../components/FormItem";
+import {useTranslation} from "react-i18next";
 
 const CabinetPage: FC<any> = ({navigation}) => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const token = useSelector((state) => state.signIn.token);
     const userInfo = useSelector((state) => state.user);
@@ -30,7 +32,9 @@ const CabinetPage: FC<any> = ({navigation}) => {
     const onPressSignUp = () => {
         navigation.navigate("SignUpPage");
     };
-
+    const onPressSettings = () => {
+        navigation.navigate("SettingsPage");
+    };
     const CabinetSchema = Yup.object().shape({
         email: Yup.string()
             .email("Invalid email")
@@ -59,7 +63,7 @@ const CabinetPage: FC<any> = ({navigation}) => {
             style={stylesBase.containerGradient}
         >
             <View style={stylesBase.container}>
-                <TitlePages onPressGoBack={onPressGoBack} text="CABINET"/>
+                <TitlePages onPressGoBack={onPressGoBack} text={t('cabinetPage.text.title')} onPressSettings={onPressSettings}/>
                 <View style={s.imgContainer}>
                     <Image
                         source={require("../assets/SignUpLogo.png")}
@@ -72,13 +76,13 @@ const CabinetPage: FC<any> = ({navigation}) => {
                             style={s.btnContainer}
                             onPress={onPressSignIn}
                         >
-                            <Text style={s.btnText}>Sign in</Text>
+                            <Text style={s.btnText}>{t('cabinetPage.buttons.signIn')}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={s.btnContainer}
                             onPress={onPressSignUp}
                         >
-                            <Text style={s.btnText}>Add driver</Text>
+                            <Text style={s.btnText}>{t('cabinetPage.buttons.signUp')}</Text>
                         </TouchableOpacity>
                     </View>
                 ) : (
