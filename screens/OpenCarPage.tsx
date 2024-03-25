@@ -2,12 +2,13 @@ import {LinearGradient} from "expo-linear-gradient";
 import {View, Image, StyleSheet} from "react-native";
 import stylesBase from "../styles/styles";
 import TitlePages from "../components/TitlePages";
-import {FC} from "react";
+import {FC, useEffect, useState} from "react";
 import ButtonLock from "../components/ButtonLock";
 import {useDispatch, useSelector} from "react-redux";
 import {toggleStatusOpenCar} from "../redux/slices/statusCar";
 import {RootStateType} from "../redux/store";
 import {useTranslation} from "react-i18next";
+import {Audio} from "expo-av";
 
 const OpenCarPage: FC<any> = ({navigation}) => {
     const {t} = useTranslation();
@@ -25,6 +26,31 @@ const OpenCarPage: FC<any> = ({navigation}) => {
     const onPressSettings = () => {
         navigation.navigate("SettingsPage");
     };
+
+    const [sound, setSound] = useState();
+
+    const playSoundOpen = async () => {
+        const {sound} = await Audio.Sound.createAsync(require('../assets/open.mp3')
+        );
+        setSound(sound);
+        await sound.playAsync();
+    }
+
+    const playSoundClose = async () => {
+        const {sound} = await Audio.Sound.createAsync(require('../assets/close.mp3')
+        );
+        setSound(sound);
+        await sound.playAsync();
+    }
+
+    useEffect(() => {
+        return sound
+            ? () => {
+                sound.unloadAsync();
+            }
+            : undefined;
+    }, [sound]);
+
     return (
         <LinearGradient
             colors={["#292C31", "#292C31", "#2D2C31"]}
@@ -54,7 +80,11 @@ const OpenCarPage: FC<any> = ({navigation}) => {
                                     style={s.unlockGradient}
                                 >
                                     <ButtonLock
-                                        onPress={onPressOpenCar}
+                                        onPress={() => {
+                                            onPressOpenCar()
+                                            playSoundOpen();
+                                        }
+                                        }
                                         img={require("../assets/buttonLock.png")}
                                         text={t('openCarPage.buttons.lockBtn')}
                                     />
@@ -78,7 +108,11 @@ const OpenCarPage: FC<any> = ({navigation}) => {
                                     style={s.unlockGradient}
                                 >
                                     <ButtonLock
-                                        onPress={onPressOpenCar}
+                                        onPress={() => {
+                                            onPressOpenCar()
+                                            playSoundClose();
+                                        }
+                                        }
                                         img={require("../assets/lock.png")}
                                         text={t('openCarPage.buttons.unlockBtn')}
                                     />

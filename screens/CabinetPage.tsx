@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC} from "react";
 import stylesBase from "../styles/styles";
 import TitlePages from "../components/TitlePages";
 import {LinearGradient} from "expo-linear-gradient";
@@ -18,7 +18,7 @@ import FormItem from "../components/FormItem";
 import {useTranslation} from "react-i18next";
 
 const CabinetPage: FC<any> = ({navigation}) => {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const dispatch = useDispatch();
     const token = useSelector((state) => state.signIn.token);
     const userInfo = useSelector((state) => state.user);
@@ -63,7 +63,8 @@ const CabinetPage: FC<any> = ({navigation}) => {
             style={stylesBase.containerGradient}
         >
             <View style={stylesBase.container}>
-                <TitlePages onPressGoBack={onPressGoBack} text={t('cabinetPage.text.title')} onPressSettings={onPressSettings}/>
+                <TitlePages onPressGoBack={onPressGoBack} text={t('cabinetPage.text.title')}
+                            onPressSettings={onPressSettings}/>
                 <View style={s.imgContainer}>
                     <Image
                         source={require("../assets/SignUpLogo.png")}
