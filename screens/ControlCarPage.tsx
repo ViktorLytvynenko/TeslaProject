@@ -28,12 +28,28 @@ const ControlCarPage: FC<any> = ({navigation}) => {
 
     const toggleHood = () => {
         dispatch(toggleStatusHoodOpen());
+        if (statusHood) {
+            playSoundClose();
+        } else {
+            playSoundOpen();
+        }
     };
     const toggleTrunk = () => {
         dispatch(toggleStatusTrunkOpen());
+        if (statusTrunk) {
+            playSoundClose();
+        } else {
+            playSoundOpen();
+        }
     };
+
     const toggleRoof = () => {
         dispatch(toggleStatusRoofOpen());
+        if (statusRoof) {
+            playSoundClose();
+        } else {
+            playSoundOpen();
+        }
     };
     const onPressGoBack = () => {
         navigation.goBack();
@@ -87,14 +103,7 @@ const ControlCarPage: FC<any> = ({navigation}) => {
                     />
                     <TouchableOpacity
                         style={s.carHood}
-                        onPress={() => {
-                            toggleHood();
-                            if (statusHood) {
-                                playSoundClose();
-                            } else {
-                                playSoundOpen();
-                            }
-                        }}
+                        onPress={toggleHood}
                     >
                         {statusHood ? (
                             <Text style={s.carHoodText}>{t('controlCarPage.text.close')}</Text>
@@ -104,14 +113,7 @@ const ControlCarPage: FC<any> = ({navigation}) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={s.carTrunk}
-                        onPress={() => {
-                            toggleTrunk();
-                            if (statusTrunk) {
-                                playSoundClose();
-                            } else {
-                                playSoundOpen();
-                            }
-                        }}
+                        onPress={toggleTrunk}
                     >
                         {statusTrunk ? (
                             <Text style={s.carTrunkText}>{t('controlCarPage.text.close')}</Text>
@@ -121,14 +123,7 @@ const ControlCarPage: FC<any> = ({navigation}) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={s.carRoof}
-                        onPress={() => {
-                            toggleRoof();
-                            if (statusRoof) {
-                                playSoundClose();
-                            } else {
-                                playSoundOpen();
-                            }
-                        }}
+                        onPress={toggleRoof}
                     >
                         {statusRoof ? (
                             <Text style={s.carRoofText}>{t('controlCarPage.text.close')}</Text>
@@ -158,7 +153,7 @@ const s = StyleSheet.create({
         position: "absolute",
         top: "85%",
         left: "50%",
-        transform: [{translateX: -10}],
+        marginLeft: -10
     },
     carHoodText: {
         color: "rgba(235, 235, 245, 0.80))",
@@ -167,7 +162,7 @@ const s = StyleSheet.create({
         position: "absolute",
         top: "17%",
         left: "50%",
-        transform: [{translateX: -10}],
+        marginLeft: -10
     },
     carTrunkText: {
         color: "rgba(235, 235, 245, 0.80))",
@@ -176,7 +171,7 @@ const s = StyleSheet.create({
         position: "absolute",
         top: "50%",
         left: "50%",
-        transform: [{translateX: -10}],
+        padding: -10
     },
     carRoofText: {
         color: "rgba(235, 235, 245, 0.80))",
