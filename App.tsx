@@ -18,6 +18,7 @@ import SignUpPage from "./screens/SignUpPage";
 import SignInPage from "./screens/SignInPage";
 import SettingsPage from "./screens/SettingsPage";
 
+
 export default function App() {
     const Stack = createNativeStackNavigator();
     const queryClient = new QueryClient();
