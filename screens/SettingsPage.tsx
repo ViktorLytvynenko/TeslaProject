@@ -79,7 +79,7 @@ const SettingsPage: FC<any> = ({navigation}) => {
                             locations={[0.0368, 0.4642]}
                             style={s.btnGradient}
                         >
-                            <Text style={s.btnText}>Ukraine</Text>
+                            <Text style={s.btnText}>Українська</Text>
                             <Image
                                 source={require("../assets/icons/ukraine.png")}
                                 style={s.flag}
